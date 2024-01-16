@@ -18,7 +18,6 @@ def load_data():
 def describe_attributes():
     st.write("## Data Set Characteristics")
     st.write("- The Boston Housing dataset contains information about various features of houses in Boston.")
-    st.write("- It includes attributes such as per capita crime rate, proportion of residential land zoned for lots over 25,000 sq.ft., average number of rooms per dwelling, etc.")
     st.write("- The target variable is the median value of owner-occupied homes in thousands of dollars.")
     st.write("- The dataset consists of 506 instances and 13 input features.")
     st.write('===================================================================')
