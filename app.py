@@ -120,6 +120,8 @@ def train_and_evaluate_models(df):
         "Decision Tree": DecisionTreeClassifier(random_state=42)
     }
 
+    trained_models = {}
+
     # Train and evaluate models
     for name, model in models_to_train.items():
         model.fit(X_train, y_train)
@@ -137,9 +139,12 @@ def train_and_evaluate_models(df):
         st.write(f"Precision: {precision:.4f}")
         st.write(f"Recall: {recall:.4f}")
         st.write(f"F1 Score: {f1:.4f}")
+
+        trained_models[name] = model
     st.write("Training completed. Models stored in session_state['models'].")
     # st.session_state['models'] = models
     # st.write("Models stored in session_state['models']")
+    return trained_models
 
 def save_model(model, filename):
     with open(filename, 'wb') as file:
@@ -194,7 +199,7 @@ def main():
             if 'df' in st.session_state and st.session_state['df'] is not None:
                 models_trained = train_and_evaluate_models(st.session_state['df'])
                 st.session_state['models'] = models_trained  # Re-assign to ensure update
-                st.write("Models trained and saved in session state.")
+                st.write(models_trained)
             else:
                 st.write("Please upload a dataset first.")
 
