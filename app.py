@@ -200,15 +200,11 @@ def main():
                 models_trained = train_and_evaluate_models(st.session_state['df'])
                 st.session_state['models'] = models_trained  # Re-assign to ensure update
                 st.write(models_trained)
-            else:
-                st.write("Please upload a dataset first.")
-
-        if st.button('Save model'):
-            if(len(models_trained)!=0):
                 for name in models_trained:
                     save_model(models_trained[name],name)
+                    st.write("model "+name+" saved")
             else:
-                st.write("Model list empty")
+                st.write("Please upload a dataset first.")
 
         st.write("### House Price Prediction")
         st.write("Enter the following features to get the predicted price:")
