@@ -88,7 +88,9 @@ def explore_data(df):
     st.pyplot(fig)
 
     st.write("#### Correlation Heatmap")
-    corr_matrix = df.corr()
+    # Select only numeric columns for correlation calculation
+    numeric_df = df.select_dtypes(include=[np.number])
+    corr_matrix = numeric_df.corr()
     fig, ax = plt.subplots(figsize=(10, 8))
     sns.heatmap(corr_matrix, ax=ax, cmap='coolwarm', annot=True, fmt=".2f")
     ax.set_title('Correlation Heatmap')
