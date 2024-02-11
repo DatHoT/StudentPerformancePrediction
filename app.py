@@ -119,6 +119,8 @@ def train_and_evaluate_models(df):
         "Decision Tree": DecisionTreeClassifier(random_state=42)
     }
 
+    trained_models = {}
+
     # Train and evaluate models
     for name, model in models.items():
         model.fit(X_train, y_train)
@@ -135,8 +137,10 @@ def train_and_evaluate_models(df):
         st.write(f"Recall: {recall:.4f}")
         st.write(f"F1 Score: {f1:.4f}")
 
+        trained_models[name] = model
+
         # Save model
-        save_model(model, f"{name.replace(' ', '_')}.pkl")
+    st.session_state['models'] = trained_models
 
 def save_model(model, filename):
     with open(filename, 'wb') as file:
@@ -194,9 +198,10 @@ def main():
 
         # Assuming you want to save all models, iterate through the models in session state
         if st.button('Save Models'):
-            if st.session_state.models:  # Check if models have been trained
+            if 'models' in st.session_state and st.session_state.models:  # Check if models exist in session state
                 for name, model in st.session_state.models.items():
-                    save_model(model, f"{name.replace(' ', '_')}.pkl")
+                    filename = f"{name.replace(' ', '_')}.pkl"
+                    save_model(model, filename)
                     st.write(f"{name} model saved.")
             else:
                 st.write("No models to save. Train models first.")
