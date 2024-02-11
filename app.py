@@ -201,7 +201,7 @@ def main():
             if 'df' in st.session_state and st.session_state['df'] is not None:
                 models_trained = train_and_evaluate_models(st.session_state['df'])
                 st.session_state['models'] = models_trained  # Re-assign to ensure update
-                st.write(models_trained)
+                st.write(st.session_state['models'])
             else:
                 st.write("Please upload a dataset first.")
 
