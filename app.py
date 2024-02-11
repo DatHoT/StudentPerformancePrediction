@@ -207,31 +207,44 @@ def main():
             else:
                 st.write("Please upload a dataset first.")
 
-        if st.button('Save model'):
-            if(len(models_trained)!=0):
-                for name in models_trained:
-                    save_model(models_trained[name],name)
-            else:
-                st.write("Model list empty")
+        st.write("### Student Performance Prediction")
+        st.write("Enter the following features to predict the student's performance:")
 
-        st.write("### House Price Prediction")
-        st.write("Enter the following features to get the predicted price:")
-        crim = st.number_input("CRIM - Per Capita Crime Rate:", value=0.0, step=0.01)
-        zn = st.number_input("ZN - Proportion of Residential Land Zoned:", value=0.0, step=0.5)
-        indus = st.number_input("INDUS - Proportion of Non-Retail Business Acres:", value=0.0, step=0.01)
-        chas = st.selectbox("CHAS - Charles River Dummy Variable:", options=[0, 1])
-        nox = st.number_input("NOX - Nitric Oxides Concentration (parts per 10 million):", value=0.0, step=0.01)
-        rm = st.number_input("RM - Average Number of Rooms per Dwelling:", value=0.0, step=0.01)
-        age = st.number_input("AGE - Proportion of Owner-Occupied Units Built Prior to 1940:", value=0.0, step=0.01)
-        dis = st.number_input("DIS - Weighted Distances to Five Boston Employment Centers:", value=0.0, step=0.01)
-        rad = st.number_input("RAD - Index of Accessibility to Radial Highways:", value=0.0, step=1.0)
-        tax = st.number_input("TAX - Full-Value Property Tax Rate per $10,000:", value=0.0, step=1.0)
-        ptratio = st.number_input("PTRATIO - Pupil-Teacher Ratio by Town:", value=0.0, step=0.01)
-        b = st.number_input("B - Proportion of Blacks:", value=0.0, step=0.01)
-        lstat = st.number_input("LSTAT - Percentage of Lower Status of the Population:", value=0.0, step=0.01)
-        medv = st.number_input("Median value of owner-occupied homes in $1000's:", value=0.0, step=0.01)
+        student_age = st.selectbox("Student Age", options=[1, 2, 3], format_func=lambda x: {1: "18-21", 2: "22-25", 3: "above 26"}[x])
+        sex = st.selectbox("Sex", options=[1, 2], format_func=lambda x: {1: "female", 2: "male"}[x])
+        high_school_type = st.selectbox("Graduated high-school type", options=[1, 2, 3], format_func=lambda x: {1: "private", 2: "state", 3: "other"}[x])
+        scholarship_type = st.selectbox("Scholarship type", options=[1, 2, 3, 4, 5], format_func=lambda x: {1: "None", 2: "25%", 3: "50%", 4: "75%", 5: "Full"}[x])
+        additional_work = st.selectbox("Additional work", options=[1, 2], format_func=lambda x: {1: "Yes", 2: "No"}[x])
+        artistic_sports_activity = st.selectbox("Regular artistic or sports activity", options=[1, 2], format_func=lambda x: {1: "Yes", 2: "No"}[x])
+        have_partner = st.selectbox("Do you have a partner", options=[1, 2], format_func=lambda x: {1: "Yes", 2: "No"}[x])
+        total_salary = st.selectbox("Total salary if available", options=[1, 2, 3, 4, 5], format_func=lambda x: {1: "USD 135-200", 2: "USD 201-270", 3: "USD 271-340", 4: "USD 341-410", 5: "above 410"}[x])
+        transportation = st.selectbox("Transportation to the university", options=[1, 2, 3, 4], format_func=lambda x: {1: "Bus", 2: "Private car/taxi", 3: "bicycle", 4: "Other"}[x])
+        accommodation_type = st.selectbox("Accommodation type in Cyprus", options=[1, 2, 3, 4], format_func=lambda x: {1: "rental", 2: "dormitory", 3: "with family", 4: "Other"}[x])
+        mothers_education = st.selectbox("Mothers’ education", options=[1, 2, 3, 4, 5, 6], format_func=lambda x: {1: "primary school", 2: "secondary school", 3: "high school", 4: "university", 5: "MSc.", 6: "Ph.D."}[x])
+        fathers_education = st.selectbox("Fathers’ education", options=[1, 2, 3, 4, 5, 6], format_func=lambda x: {1: "primary school", 2: "secondary school", 3: "high school", 4: "university", 5: "MSc.", 6: "Ph.D."}[x])
+        siblings = st.selectbox("Number of sisters/brothers", options=[1, 2, 3, 4, 5], format_func=lambda x: {1: "1", 2: "2", 3: "3", 4: "4", 5: "5 or above"}[x])
+        parental_status = st.selectbox("Parental status", options=[1, 2, 3], format_func=lambda x: {1: "married", 2: "divorced", 3: "died - one of them or both"}[x])
+        mother_occupation = st.selectbox("Mother occupation", options=[1, 2, 3, 4, 5, 6], format_func=lambda x: {1: "retired", 2: "housewife", 3: "government officer", 4: "private sector employee", 5: "self-employment", 6: "other"}[x])
+        father_occupation = st.selectbox("Father occupation", options=[1, 2, 3, 4, 5], format_func=lambda x: {1: "retired", 2: "government officer", 3: "private sector employee", 4: "self-employment", 5: "other"}[x])
+        weekly_study_hours = st.selectbox("Weekly study hours", options=[1, 2, 3, 4, 5], format_func=lambda x: {1: "None", 2: "<5 hours", 3: "6-10 hours", 4: "11-20 hours", 5: "more than 20 hours"}[x])
+        reading_frequency_non_scientific = st.selectbox("Reading frequency (non-scientific books/journals)", options=[1, 2, 3], format_func=lambda x: {1: "None", 2: "Sometimes", 3: "Often"}[x])
+        reading_frequency_scientific = st.selectbox("Reading frequency (scientific books/journals)", options=[1, 2, 3], format_func=lambda x: {1: "None", 2: "Sometimes", 3: "Often"}[x])
+        seminars_conferences_attendance = st.selectbox("Attendance to the seminars/conferences related to the department", options=[1, 2], format_func=lambda x: {1: "Yes", 2: "No"}[x])
+        projects_activities_impact = st.selectbox("Impact of your projects/activities on your success", options=[1, 2, 3], format_func=lambda x: {1: "positive", 2: "negative", 3: "neutral"}[x])
+        class_attendance = st.selectbox("Attendance to classes", options=[1, 2, 3], format_func=lambda x: {1: "always", 2: "sometimes", 3: "never"}[x])
+        preparation_midterm_exams1 = st.selectbox("Preparation to midterm exams 1", options=[1, 2, 3], format_func=lambda x: {1: "alone", 2: "with friends", 3: "not applicable"}[x])
+        preparation_midterm_exams2 = st.selectbox("Preparation to midterm exams 2", options=[1, 2, 3], format_func=lambda x: {1: "closest date to the exam", 2: "regularly during the semester", 3: "never"}[x])
+        taking_notes = st.selectbox("Taking notes in classes", options=[1, 2, 3], format_func=lambda x: {1: "never", 2: "sometimes", 3: "always"}[x])
+        listening_in_classes = st.selectbox("Listening in classes", options=[1, 2, 3], format_func=lambda x: {1: "never", 2: "sometimes", 3: "always"}[x])
+        discussion_contribution = st.selectbox("Discussion improves my interest and success in the course", options=[1, 2, 3], format_func=lambda x: {1: "never", 2: "sometimes", 3: "always"}[x])
+        flip_classroom_effectiveness = st.selectbox("Flip-classroom", options=[1, 2, 3], format_func=lambda x: {1: "not useful", 2: "useful", 3: "not applicable"}[x])
+        last_semester_gpa = st.selectbox("Cumulative grade point average in the last semester (/4.00)", options=[1, 2, 3, 4, 5], format_func=lambda x: {1: "<2.00", 2: "2.00-2.49", 3: "2.50-2.99", 4: "3.00-3.49", 5: "above 3.49"}[x])
+        expected_graduation_gpa = st.selectbox("Expected Cumulative grade point average in the graduation (/4.00)", options=[1, 2, 3, 4, 5], format_func=lambda x: {1: "<2.00", 2: "2.00-2.49", 3: "2.50-2.99", 4: "3.00-3.49", 5: "above 3.49"}[x])
+        course_id = st.text_input("Course ID")
+    
 
-        input_data = np.array([[crim, zn, indus, chas, nox, rm, age, dis, rad, tax, ptratio, b, lstat, medv]])
+        input_data = np.array([[student_age, sex, high_school_type, scholarship_type, additional_work, artistic_sports_activity, have_partner, total_salary, transportation, accommodation_type, mothers_education, fathers_education, siblings, parental_status, mother_occupation, father_occupation, weekly_study_hours, reading_frequency_non_scientific, reading_frequency_scientific, seminars_conferences_attendance, projects_activities_impact, class_attendance, preparation_midterm_exams1, preparation_midterm_exams2, taking_notes, listening_in_classes, discussion_contribution, flip_classroom_effectiveness, last_semester_gpa, expected_graduation_gpa, course_id]])
+
 
         if st.button("Predict Price"):
             prediction = predict_price(model, input_data)
