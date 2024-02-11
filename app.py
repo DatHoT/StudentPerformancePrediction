@@ -4,6 +4,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import pickle
 import seaborn as sns
+import os
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression, LogisticRegression
 from sklearn.ensemble import RandomForestRegressor
@@ -186,6 +187,7 @@ def main():
     if 'models' not in st.session_state:
         st.session_state['models'] = {}
     if uploaded_file is not None:
+        st.write("Current working directory:", os.getcwd())
         df = pd.read_csv(uploaded_file)
         st.session_state['df'] = df
         #describe_attributes()
