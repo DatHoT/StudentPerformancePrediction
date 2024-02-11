@@ -12,7 +12,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import precision_score, recall_score, f1_score, classification_report, roc_auc_score
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from sklearn.preprocessing import LabelEncoder
 
 # Function to load the dataset
@@ -131,12 +131,14 @@ def train_and_evaluate_models(df):
         y_pred = model.predict(X_test)
 
         # Calculate metrics
+        accuracy = accuracy_score(y_test, y_pred, average='weighted')
         precision = precision_score(y_test, y_pred, average='weighted', zero_division=0)
         recall = recall_score(y_test, y_pred, average='weighted')
         f1 = f1_score(y_test, y_pred, average='weighted')
 
         # Display metrics
         st.write(f"#### {name} Performance")
+        st.write(f"Precision: {accuracy:.4f}")
         st.write(f"Precision: {precision:.4f}")
         st.write(f"Recall: {recall:.4f}")
         st.write(f"F1 Score: {f1:.4f}")
