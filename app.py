@@ -204,9 +204,17 @@ def main():
         st.write("### Student Performance Prediction")
         st.write("Enter the following features to predict the student's performance:")
 
-        student_age = st.selectbox("Student Age", options=[1, 2, 3], format_func=lambda x: {1: "18-21", 2: "22-25", 3: "above 26"}[x])
-        sex = st.selectbox("Sex", options=[1, 2], format_func=lambda x: {1: "female", 2: "male"}[x])
-        high_school_type = st.selectbox("Graduated high-school type", options=[1, 2, 3], format_func=lambda x: {1: "private", 2: "state", 3: "other"}[x])
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+            student_age = st.selectbox("Student Age", options=[1, 2, 3], format_func=lambda x: {1: "18-21", 2: "22-25", 3: "above 26"}[x], key='student_age')
+
+        with col2:
+            sex = st.selectbox("Sex", options=[1, 2], format_func=lambda x: {1: "female", 2: "male"}[x], key='sex')
+
+        with col3:
+            high_school_type = st.selectbox("Graduated high-school type", options=[1, 2, 3], format_func=lambda x: {1: "private", 2: "state", 3: "other"}[x], key='high_school_type')
+
         scholarship_type = st.selectbox("Scholarship type", options=[1, 2, 3, 4, 5], format_func=lambda x: {1: "None", 2: "25%", 3: "50%", 4: "75%", 5: "Full"}[x])
         additional_work = st.selectbox("Additional work", options=[1, 2], format_func=lambda x: {1: "Yes", 2: "No"}[x])
         artistic_sports_activity = st.selectbox("Regular artistic or sports activity", options=[1, 2], format_func=lambda x: {1: "Yes", 2: "No"}[x])
