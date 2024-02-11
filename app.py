@@ -20,7 +20,7 @@ def describe_attributes():
     st.write("- The dataset contains information about various features of university students, aimed at predicting their end-of-term academic results.")
     st.write("- It includes personal, family, and academic attributes such as age, sex, high-school type, scholarship type, study hours, reading frequency, and more.")
     st.write("- The target variable is the students' grades, categorized into several classes ranging from 'Fail' to 'AA'.")
-    st.write("- The dataset consists of 145 instances and 31 input features.")
+    st.write("- The dataset consists of 145 instances and 33 input features.")
     st.write('===================================================================')
     st.write("## Attribute Information")
     st.write("1- Student Age (1: 18-21, 2: 22-25, 3: above 26)")
@@ -66,32 +66,30 @@ def explore_data(df):
     st.write("### Dataset Description")
     st.write(df.describe())
 
-    # Data visualization
+        # Data visualization
     st.write("### Data Visualization")
-    st.write("#### Scatter Plot")
-
+    st.write("#### Histogram for Age Groups")
     fig, ax = plt.subplots()
-    ax.scatter(df['RM'], df['MEDV'])
-    ax.set_xlabel('RM: Average number of rooms per dwelling')
-    ax.set_ylabel('Median value of owner-occupied homes in $1000s')
+    ax.hist(df['1'], bins=range(1,5), rwidth=0.8)  # Assuming '1' is the column for student age groups
+    ax.set_xlabel('Age Groups')
+    ax.set_ylabel('Frequency')
+    ax.set_xticks(range(1,5))
+    ax.set_xticklabels(['18-21', '22-25', 'above 26'])
     st.pyplot(fig)
 
-    st.write("#### Histogram")
+    st.write("#### Gender Distribution")
     fig, ax = plt.subplots()
-    ax.hist(df['MEDV'])
-    ax.set_xlabel('Median value of owner-occupied homes in $1000s')
+    df['2'].value_counts().plot(kind='bar', ax=ax)  # Assuming '2' is the column for sex (1: female, 2: male)
+    ax.set_xlabel('Gender')
     ax.set_ylabel('Frequency')
+    ax.set_xticklabels(['Female', 'Male'], rotation=0)
     st.pyplot(fig)
 
     st.write("#### Correlation Heatmap")
-    corr_matrix = df.corr().values
-    fig, ax = plt.subplots()
-    im = ax.imshow(corr_matrix, cmap='coolwarm')
-    ax.set_xticks(np.arange(len(df.columns)))
-    ax.set_yticks(np.arange(len(df.columns)))
-    ax.set_xticklabels(df.columns, rotation=45, ha='right')
-    ax.set_yticklabels(df.columns)
-    fig.colorbar(im)
+    corr_matrix = df.corr()
+    fig, ax = plt.subplots(figsize=(10, 8))
+    sns.heatmap(corr_matrix, ax=ax, cmap='coolwarm', annot=True, fmt=".2f")
+    ax.set_title('Correlation Heatmap')
     st.pyplot(fig)
 
 # Function to save the trained model
@@ -203,17 +201,9 @@ def main():
     if st.button("Predict Price"):
         prediction = predict_price(model, input_data)
         st.write("### Predicted House Price using LinearRegression:", prediction)
-      #  visualize_prediction(df, prediction)
-      #  st.write(prediction)
 
         prediction = predict_priceR(modelR, input_data)
         st.write("### Predicted House Price using RandomForest:", prediction)
-
-   # if st.button("Predict RandomForest"):
-    #    prediction = predict_priceR(modelR, input_data)
-     #   st.write("## Predicted House Price using RandomForest:", prediction)
-      #  visualize_prediction(df, prediction)
-       # st.write(prediction)
 
 if __name__ == "__main__":
     main()
