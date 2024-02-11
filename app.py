@@ -112,18 +112,21 @@ def train_and_evaluate_models(df):
     # Split the dataset
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
+    if 'models' not in st.session_state:
+        st.session_state.models = {}
+
     # Models to train
-    models = {
+    models_to_train = {
         "Logistic Regression": LogisticRegression(max_iter=1000, random_state=42),
         "KNN": KNeighborsClassifier(),
         "Decision Tree": DecisionTreeClassifier(random_state=42)
     }
 
-    trained_models = {}
-
     # Train and evaluate models
-    for name, model in models.items():
+    for name, model in models_to_train.items():
         model.fit(X_train, y_train)
+        # Directly update session state with each trained model
+        st.session_state.models[name] = model
         y_pred = model.predict(X_test)
 
         # Calculate metrics
@@ -136,10 +139,9 @@ def train_and_evaluate_models(df):
         st.write(f"Precision: {precision:.4f}")
         st.write(f"Recall: {recall:.4f}")
         st.write(f"F1 Score: {f1:.4f}")
-
-    # Update session state with trained models
-    st.session_state['models'] = models
-    st.write("Models stored in session_state['models']")
+    st.write("Training completed. Models stored in session_state['models'].")
+    # st.session_state['models'] = models
+    # st.write("Models stored in session_state['models']")
 
 def save_model(model, filename):
     with open(filename, 'wb') as file:
