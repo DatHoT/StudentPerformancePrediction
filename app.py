@@ -3,12 +3,16 @@ import numpy as np
 import streamlit as st
 import matplotlib.pyplot as plt
 import pickle
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_squared_error, r2_score
-from sklearn.impute import SimpleImputer
 import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression, LogisticRegression
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import precision_score, recall_score, f1_score, classification_report, roc_auc_score
+from sklearn.preprocessing import LabelEncoder
 
 # Function to load the dataset
 @st.cache_data()
@@ -93,51 +97,51 @@ def save_model(model, filename):
     with open(filename, 'wb') as file:
         pickle.dump(model, file)
 
-# Function to train and evaluate the model
-def train_model(df):
+# Function to train and evaluate the model Randomforest
+def train_and_evaluate_models(df):
     st.write("### Model Training and Evaluation")
 
-    X = df.drop('MEDV', axis=1)
-    y = df['MEDV']
-
-    # Impute missing values
-    imputer = SimpleImputer(strategy='mean')
-    X = imputer.fit_transform(X)
-
+    # Assuming 'OUTPUT Grade' is the target variable
+    X = df.drop('OUTPUT Grade', axis=1)
+    y = df['OUTPUT Grade']
+    
+    # Preprocessing steps (if not already done)
+    # Encode categorical variables (assuming all are categorical or have been handled appropriately)
+    X = pd.get_dummies(X, drop_first=True)
+    
+    # Split the dataset
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    model = LinearRegression()
-    model.fit(X_train, y_train)
+    # Models to train
+    models = {
+        "Logistic Regression": LogisticRegression(max_iter=1000, random_state=42),
+        "KNN": KNeighborsClassifier(),
+        "Decision Tree": DecisionTreeClassifier(random_state=42)
+    }
 
-    y_pred = model.predict(X_test)
+    # Train and evaluate models
+    for name, model in models.items():
+        model.fit(X_train, y_train)
+        y_pred = model.predict(X_test)
 
-    st.write("#### Model Performance")
-    st.write("Mean Squared Error:", mean_squared_error(y_test, y_pred))
-    st.write("R-squared Score:", r2_score(y_test, y_pred))
-    save_model(model, "LinearRegression.pkl")
-    return model
+        # Calculate metrics
+        precision = precision_score(y_test, y_pred, average='weighted', zero_division=0)
+        recall = recall_score(y_test, y_pred, average='weighted')
+        f1 = f1_score(y_test, y_pred, average='weighted')
 
-# Function to train and evaluate the model Randomforest
-def train_modelR(df):
-    st.write("### Model Randomforest Training and Evaluation")
+        # Display metrics
+        st.write(f"#### {name} Performance")
+        st.write(f"Precision: {precision:.4f}")
+        st.write(f"Recall: {recall:.4f}")
+        st.write(f"F1 Score: {f1:.4f}")
 
-    X = df.drop('MEDV', axis=1)
-    y = df['MEDV']
-    # Impute missing values
-    imputer = SimpleImputer(strategy='mean')
-    X = imputer.fit_transform(X)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+        # Save model
+        save_model(model, f"{name.replace(' ', '_')}.pkl")
 
-    modelR = RandomForestRegressor(n_estimators=100, random_state=42)
-    modelR.fit(X_train, y_train)
+def save_model(model, filename):
+    with open(filename, 'wb') as file:
+        pickle.dump(model, file)
 
-    y_pred = modelR.predict(X_test)
-
-    st.write("#### Model Randomforest Performance")
-    st.write("Mean Squared Error:", mean_squared_error(y_test, y_pred))
-    st.write("R-squared Score:", r2_score(y_test, y_pred))
-    save_model(modelR, "RandomForest.pkl")
-    return modelR
 
 # Function to predict house prices using LinearRegression
 
@@ -168,15 +172,33 @@ def visualize_prediction(df, predicted_prices):
     st.pyplot(fig)
 
 def main():
-    st.title("House Price Prediction")
-    uploaded_file = st.file_uploader("Choose a file")
+    st.title("Student Performance Prediction")
+    uploaded_file = st.file_uploader("Upload the dataset")
     # Check if a file has been uploaded
     if uploaded_file is not None:
         df = pd.read_csv(uploaded_file)
         #describe_attributes()
         explore_data(df)
-        model = train_model(df)
-        modelR = train_modelR(df)
+        # Initialize or load session state for models
+    if 'models' not in st.session_state:
+        st.session_state.models = {}
+
+    # Button to train and evaluate models
+    if st.button('Train and Evaluate Models'):
+        if 'df' in globals():  # Check if df is loaded
+            st.session_state.models = train_and_evaluate_models(df)
+            st.write("Models trained and evaluated.")
+        else:
+            st.write("Please upload a dataset first.")
+
+    # Assuming you want to save all models, iterate through the models in session state
+    if st.button('Save Models'):
+        if st.session_state.models:  # Check if models have been trained
+            for name, model in st.session_state.models.items():
+                save_model(model, f"{name.replace(' ', '_')}.pkl")
+                st.write(f"{name} model saved.")
+        else:
+            st.write("No models to save. Train models first.")
 
         st.write("### House Price Prediction")
         st.write("Enter the following features to get the predicted price:")
