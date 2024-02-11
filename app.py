@@ -102,7 +102,6 @@ def save_model(model, filename):
 
 # Function to train and evaluate the model Randomforest
 def train_and_evaluate_models(df):
-    st.write("### Model Training and Evaluation")
 
     # Assuming 'GRADE' is the target variable
     X = df.drop(['GRADE','STUDENT ID'], axis=1)
@@ -128,6 +127,7 @@ def train_and_evaluate_models(df):
     # Train and evaluate models
     for name, model in models_to_train.items():
         model.fit(X_train, y_train)
+        st.session_state.models = {}
         # Directly update session state with each trained model
         st.session_state.models[name] = model
         y_pred = model.predict(X_test)
@@ -198,6 +198,7 @@ def main():
         #describe_attributes()
         explore_data(df)
         # Button to train and evaluate models
+        st.write("### Model Training and Evaluation")
         if st.button('Train and Evaluate Models'):
             if 'df' in st.session_state and st.session_state['df'] is not None:
                 models_trained = train_and_evaluate_models(st.session_state['df'])
