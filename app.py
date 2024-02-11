@@ -180,25 +180,25 @@ def main():
         #describe_attributes()
         explore_data(df)
         # Initialize or load session state for models
-    if 'models' not in st.session_state:
-        st.session_state.models = {}
+        if 'models' not in st.session_state:
+            st.session_state.models = {}
 
-    # Button to train and evaluate models
-    if st.button('Train and Evaluate Models'):
-        if 'df' in globals():  # Check if df is loaded
-            st.session_state.models = train_and_evaluate_models(df)
-            st.write("Models trained and evaluated.")
-        else:
-            st.write("Please upload a dataset first.")
+        # Button to train and evaluate models
+        if st.button('Train and Evaluate Models'):
+            if 'df' in globals():  # Check if df is loaded
+                st.session_state.models = train_and_evaluate_models(df)
+                st.write("Models trained and evaluated.")
+            else:
+                st.write("Please upload a dataset first.")
 
-    # Assuming you want to save all models, iterate through the models in session state
-    if st.button('Save Models'):
-        if st.session_state.models:  # Check if models have been trained
-            for name, model in st.session_state.models.items():
-                save_model(model, f"{name.replace(' ', '_')}.pkl")
-                st.write(f"{name} model saved.")
-        else:
-            st.write("No models to save. Train models first.")
+        # Assuming you want to save all models, iterate through the models in session state
+        if st.button('Save Models'):
+            if st.session_state.models:  # Check if models have been trained
+                for name, model in st.session_state.models.items():
+                    save_model(model, f"{name.replace(' ', '_')}.pkl")
+                    st.write(f"{name} model saved.")
+            else:
+                st.write("No models to save. Train models first.")
 
         st.write("### House Price Prediction")
         st.write("Enter the following features to get the predicted price:")
