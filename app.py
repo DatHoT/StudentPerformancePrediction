@@ -27,7 +27,7 @@ def describe_attributes():
     st.write("- The dataset contains information about various features of university students, aimed at predicting their end-of-term academic results.")
     st.write("- It includes personal, family, and academic attributes such as age, sex, high-school type, scholarship type, study hours, reading frequency, and more.")
     st.write("- The target variable is the students' grades, categorized into several classes ranging from 'Fail' to 'AA'.")
-    st.write("- The dataset consists of 145 instances and 33 input features.")
+    st.write("- The dataset consists of 145 instances and 31 input features.")
     st.write('===================================================================')
     st.write("## Attribute Information")
     st.write("1- Student Age (1: 18-21, 2: 22-25, 3: above 26)")
@@ -106,7 +106,7 @@ def train_and_evaluate_models(df):
     # Assuming 'GRADE' is the target variable
     X = df.drop('GRADE', axis=1)
     y = df['GRADE']
-    
+    st.write(X)
     # Preprocessing steps (if not already done)
     # Encode categorical variables (assuming all are categorical or have been handled appropriately)
     X = pd.get_dummies(X, drop_first=True)
@@ -239,6 +239,18 @@ def main():
 
         input_data = np.array([[student_age, sex, high_school_type, scholarship_type, additional_work, artistic_sports_activity, have_partner, total_salary, transportation, accommodation_type, mothers_education, fathers_education, siblings, parental_status, mother_occupation, father_occupation, weekly_study_hours, reading_frequency_non_scientific, reading_frequency_scientific, seminars_conferences_attendance, projects_activities_impact, class_attendance, preparation_midterm_exams1, preparation_midterm_exams2, taking_notes, listening_in_classes, discussion_contribution, flip_classroom_effectiveness, last_semester_gpa, expected_graduation_gpa, course_id]])
 
+        input_df = pd.DataFrame([input_data])
+        input_df_processed = pd.get_dummies(input_df)
+        training_features = st.session_state.training_features  # Assume this holds the column names from X_train after preprocessing
+        input_df_processed = input_df_processed.reindex(columns=training_features, fill_value=0)
+
+        # Assuming 'GRADE' is the target variable
+        X = df.drop('GRADE', axis=1)
+        y = df['GRADE']
+        
+        # Preprocessing steps (if not already done)
+        # Encode categorical variables (assuming all are categorical or have been handled appropriately)
+        X = pd.get_dummies(X, drop_first=True)
 
         if st.button("Predict Price"):
             for name in st.session_state.models:
