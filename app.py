@@ -177,6 +177,7 @@ def main():
     # Check if a file has been uploaded
     if uploaded_file is not None:
         df = pd.read_csv(uploaded_file)
+        st.session_state['df'] = df
         #describe_attributes()
         explore_data(df)
         # Initialize or load session state for models
