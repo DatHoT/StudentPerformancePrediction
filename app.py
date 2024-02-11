@@ -193,7 +193,7 @@ def main():
         # Initialize or load session state for models
         if 'models' not in st.session_state or st.session_state is not None:
             st.session_state.models = {}
-
+        models_trained = []
         # Button to train and evaluate models
         if st.button('Train and Evaluate Models'):
             if 'df' in st.session_state and st.session_state['df'] is not None:
@@ -203,14 +203,12 @@ def main():
             else:
                 st.write("Please upload a dataset first.")
 
-        # Debugging: Check the content of session_state['models'] after training
-        if st.button('Debug: Show Models in Session State'):
-            st.write(st.session_state.models)
-            if st.session_state.models:
-                for name in st.session_state.models:
-                    st.write(f"Model stored: {name}")
+        if st.button('Save model'):
+            if(len(models_trained)!=0):
+                for name in models_trained:
+                    save_model(models_trained[name],name)
             else:
-                st.write("No models stored in session state.")
+                st.write("Model list empty")
 
         st.write("### House Price Prediction")
         st.write("Enter the following features to get the predicted price:")
