@@ -202,9 +202,15 @@ def main():
                 st.write(models_trained)
                 for name in models_trained:
                     save_model(models_trained[name],name)
-                    st.write("model "+name+" saved")
             else:
                 st.write("Please upload a dataset first.")
+
+        if st.button('Save model'):
+            if(len(models_trained)!=0):
+                for name in models_trained:
+                    save_model(models_trained[name],name)
+            else:
+                st.write("Model list empty")
 
         st.write("### House Price Prediction")
         st.write("Enter the following features to get the predicted price:")
