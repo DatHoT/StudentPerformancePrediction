@@ -154,18 +154,18 @@ def save_model(model, filename):
 
 # Function to predict house prices using LinearRegression
 
-def predict_price(model, input_data):
-    # Ensure input_data has the same number of features as the training dataset
-    if input_data.shape[1] != model.coef_.shape[0]:
-        raise ValueError("Number of features in input data does not match the model")
+# def predict_price(model, input_data):
+#     # Ensure input_data has the same number of features as the training dataset
+#     if input_data.shape[1] != model.coef_.shape[0]:
+#         raise ValueError("Number of features in input data does not match the model")
 
-    prediction = model.predict(input_data)
-    return prediction
+#     prediction = model.predict(input_data)
+#     return prediction
 
-# Function to predict house prices using RandomForest
-def predict_priceR(modelR, input_data):
-    predictionR = modelR.predict(input_data)
-    return predictionR
+# # Function to predict house prices using RandomForest
+# def predict_priceR(modelR, input_data):
+#     predictionR = modelR.predict(input_data)
+#     return predictionR
 
 # Function to visualize the predicted prices
 def visualize_prediction(df, predicted_prices):
@@ -246,8 +246,9 @@ def main():
 
         if st.button("Predict Price"):
             st.write(st.session_state.models)
+            st.write(st.session_state)
             for name in models_trained:
-                prediction = predict_price(models_trained[name], input_data)
+                prediction = models_trained[name].predict(input_data)
                 st.write("### Predicted House Price using "+name+" :", prediction)
     else: 
         st.write("Please upload a file to proceed.")
