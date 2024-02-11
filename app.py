@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import pickle
 import seaborn as sns
 import os
+from sklearn.svm import SVC
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression, LogisticRegression
 from sklearn.ensemble import RandomForestRegressor
@@ -118,7 +119,8 @@ def train_and_evaluate_models(df):
     models_to_train = {
         "Logistic Regression": LogisticRegression(max_iter=1000, random_state=42),
         "KNN": KNeighborsClassifier(),
-        "Decision Tree": DecisionTreeClassifier(random_state=42)
+        "Decision Tree": DecisionTreeClassifier(random_state=42),
+        "SVM": SVC(random_state=42)  # Replace Decision Tree with SVM
     }
 
     trained_models = {}
