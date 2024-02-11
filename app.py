@@ -66,14 +66,16 @@ def explore_data(df):
     st.write("### Dataset Description")
     st.write(df.describe())
 
-        # Data visualization
+     # Data visualization
     st.write("### Data Visualization")
     st.write("#### Histogram for Age Groups")
     fig, ax = plt.subplots()
-    ax.hist(df['1'], bins=range(1,5), rwidth=0.8)  # Assuming '1' is the column for student age groups
+    # Assuming '1' is the column for student age groups
+    counts, bins, patches = ax.hist(df['1'], bins=range(1, 5), rwidth=0.8, align='left')
     ax.set_xlabel('Age Groups')
     ax.set_ylabel('Frequency')
-    ax.set_xticks(range(1,5))
+    # Set x-ticks to be at the center of each bin
+    ax.set_xticks(np.arange(1, 4) + 0.5)
     ax.set_xticklabels(['18-21', '22-25', 'above 26'])
     st.pyplot(fig)
 
