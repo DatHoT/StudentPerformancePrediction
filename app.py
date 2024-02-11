@@ -138,7 +138,7 @@ def train_and_evaluate_models(df):
 
         # Display metrics
         st.write(f"#### {name} Performance")
-        st.write(f"Precision: {accuracy:.4f}")
+        st.write(f"Accuracy: {accuracy:.4f}")
         st.write(f"Precision: {precision:.4f}")
         st.write(f"Recall: {recall:.4f}")
         st.write(f"F1 Score: {f1:.4f}")
