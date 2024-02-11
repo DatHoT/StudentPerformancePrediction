@@ -101,9 +101,9 @@ def save_model(model, filename):
 def train_and_evaluate_models(df):
     st.write("### Model Training and Evaluation")
 
-    # Assuming 'OUTPUT Grade' is the target variable
-    X = df.drop('OUTPUT Grade', axis=1)
-    y = df['OUTPUT Grade']
+    # Assuming 'GRADE' is the target variable
+    X = df.drop('GRADE', axis=1)
+    y = df['GRADE']
     
     # Preprocessing steps (if not already done)
     # Encode categorical variables (assuming all are categorical or have been handled appropriately)
