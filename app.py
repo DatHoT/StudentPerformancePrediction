@@ -106,7 +106,6 @@ def train_and_evaluate_models(df):
     # Assuming 'GRADE' is the target variable
     X = df.drop(['GRADE','STUDENT ID'], axis=1)
     y = df['GRADE']
-    st.write(X)
     # Preprocessing steps (if not already done)
     # Encode categorical variables (assuming all are categorical or have been handled appropriately)
     X = pd.get_dummies(X, drop_first=True)
@@ -192,7 +191,6 @@ def main():
     # if 'models' not in st.session_state:
     #     st.session_state['models'] = {}
     if uploaded_file is not None:
-        st.write("Current working directory:", os.getcwd())
         df = pd.read_csv(uploaded_file)
         st.session_state['df'] = df
         #describe_attributes()
