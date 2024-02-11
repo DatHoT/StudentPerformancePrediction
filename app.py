@@ -12,7 +12,7 @@ from sklearn.impute import SimpleImputer
 # Function to load the dataset
 @st.cache_data()
 def load_data():
-    url = 'Boston_Housing.csv'
+    url = 'higher+education+students+performance+evaluation\Student_dataset.csv'
     return pd.read_csv(url)
 # Function to describe the attribute information
 def describe_attributes():
