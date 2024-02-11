@@ -185,8 +185,8 @@ def main():
     uploaded_file = st.file_uploader("Upload the dataset")
     # Check if a file has been uploaded
     models_trained = []
-    if 'models' not in st.session_state:
-        st.session_state['models'] = {}
+    # if 'models' not in st.session_state:
+    #     st.session_state['models'] = {}
     if uploaded_file is not None:
         st.write("Current working directory:", os.getcwd())
         df = pd.read_csv(uploaded_file)
