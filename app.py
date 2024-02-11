@@ -226,31 +226,97 @@ def main():
         with col6:
             artistic_sports_activity = st.selectbox("Regular artistic or sports activity", options=[1, 2], format_func=lambda x: {1: "Yes", 2: "No"}[x], key='artistic_sports_activity')
 
-        have_partner = st.selectbox("Do you have a partner", options=[1, 2], format_func=lambda x: {1: "Yes", 2: "No"}[x])
-        total_salary = st.selectbox("Total salary if available", options=[1, 2, 3, 4, 5], format_func=lambda x: {1: "USD 135-200", 2: "USD 201-270", 3: "USD 271-340", 4: "USD 341-410", 5: "above 410"}[x])
-        transportation = st.selectbox("Transportation to the university", options=[1, 2, 3, 4], format_func=lambda x: {1: "Bus", 2: "Private car/taxi", 3: "bicycle", 4: "Other"}[x])
-        accommodation_type = st.selectbox("Accommodation type in Cyprus", options=[1, 2, 3, 4], format_func=lambda x: {1: "rental", 2: "dormitory", 3: "with family", 4: "Other"}[x])
-        mothers_education = st.selectbox("Mothers’ education", options=[1, 2, 3, 4, 5, 6], format_func=lambda x: {1: "primary school", 2: "secondary school", 3: "high school", 4: "university", 5: "MSc.", 6: "Ph.D."}[x])
-        fathers_education = st.selectbox("Fathers’ education", options=[1, 2, 3, 4, 5, 6], format_func=lambda x: {1: "primary school", 2: "secondary school", 3: "high school", 4: "university", 5: "MSc.", 6: "Ph.D."}[x])
-        siblings = st.selectbox("Number of sisters/brothers", options=[1, 2, 3, 4, 5], format_func=lambda x: {1: "1", 2: "2", 3: "3", 4: "4", 5: "5 or above"}[x])
-        parental_status = st.selectbox("Parental status", options=[1, 2, 3], format_func=lambda x: {1: "married", 2: "divorced", 3: "died - one of them or both"}[x])
-        mother_occupation = st.selectbox("Mother occupation", options=[1, 2, 3, 4, 5, 6], format_func=lambda x: {1: "retired", 2: "housewife", 3: "government officer", 4: "private sector employee", 5: "self-employment", 6: "other"}[x])
-        father_occupation = st.selectbox("Father occupation", options=[1, 2, 3, 4, 5], format_func=lambda x: {1: "retired", 2: "government officer", 3: "private sector employee", 4: "self-employment", 5: "other"}[x])
-        weekly_study_hours = st.selectbox("Weekly study hours", options=[1, 2, 3, 4, 5], format_func=lambda x: {1: "None", 2: "<5 hours", 3: "6-10 hours", 4: "11-20 hours", 5: "more than 20 hours"}[x])
-        reading_frequency_non_scientific = st.selectbox("Reading frequency (non-scientific books/journals)", options=[1, 2, 3], format_func=lambda x: {1: "None", 2: "Sometimes", 3: "Often"}[x])
-        reading_frequency_scientific = st.selectbox("Reading frequency (scientific books/journals)", options=[1, 2, 3], format_func=lambda x: {1: "None", 2: "Sometimes", 3: "Often"}[x])
-        seminars_conferences_attendance = st.selectbox("Attendance to the seminars/conferences related to the department", options=[1, 2], format_func=lambda x: {1: "Yes", 2: "No"}[x])
-        projects_activities_impact = st.selectbox("Impact of your projects/activities on your success", options=[1, 2, 3], format_func=lambda x: {1: "positive", 2: "negative", 3: "neutral"}[x])
-        class_attendance = st.selectbox("Attendance to classes", options=[1, 2, 3], format_func=lambda x: {1: "always", 2: "sometimes", 3: "never"}[x])
-        preparation_midterm_exams1 = st.selectbox("Preparation to midterm exams 1", options=[1, 2, 3], format_func=lambda x: {1: "alone", 2: "with friends", 3: "not applicable"}[x])
-        preparation_midterm_exams2 = st.selectbox("Preparation to midterm exams 2", options=[1, 2, 3], format_func=lambda x: {1: "closest date to the exam", 2: "regularly during the semester", 3: "never"}[x])
-        taking_notes = st.selectbox("Taking notes in classes", options=[1, 2, 3], format_func=lambda x: {1: "never", 2: "sometimes", 3: "always"}[x])
-        listening_in_classes = st.selectbox("Listening in classes", options=[1, 2, 3], format_func=lambda x: {1: "never", 2: "sometimes", 3: "always"}[x])
-        discussion_contribution = st.selectbox("Discussion improves my interest and success in the course", options=[1, 2, 3], format_func=lambda x: {1: "never", 2: "sometimes", 3: "always"}[x])
-        flip_classroom_effectiveness = st.selectbox("Flip-classroom", options=[1, 2, 3], format_func=lambda x: {1: "not useful", 2: "useful", 3: "not applicable"}[x])
-        last_semester_gpa = st.selectbox("Cumulative grade point average in the last semester (/4.00)", options=[1, 2, 3, 4, 5], format_func=lambda x: {1: "<2.00", 2: "2.00-2.49", 3: "2.50-2.99", 4: "3.00-3.49", 5: "above 3.49"}[x])
-        expected_graduation_gpa = st.selectbox("Expected Cumulative grade point average in the graduation (/4.00)", options=[1, 2, 3, 4, 5], format_func=lambda x: {1: "<2.00", 2: "2.00-2.49", 3: "2.50-2.99", 4: "3.00-3.49", 5: "above 3.49"}[x])
-        course_id = st.selectbox("Course ID",options=[1, 2, 3, 4, 5, 6, 7, 8, 9])
+            # Continuing with the next row of inputs
+        col7, col8, col9 = st.columns(3)
+
+        with col7:
+            have_partner = st.selectbox("Do you have a partner", options=[1, 2], format_func=lambda x: {1: "Yes", 2: "No"}[x], key='have_partner')
+
+        with col8:
+            total_salary = st.selectbox("Total salary if available", options=[1, 2, 3, 4, 5], format_func=lambda x: {1: "USD 135-200", 2: "USD 201-270", 3: "USD 271-340", 4: "USD 341-410", 5: "above 410"}[x], key='total_salary')
+
+        with col9:
+            transportation = st.selectbox("Transportation to the university", options=[1, 2, 3, 4], format_func=lambda x: {1: "Bus", 2: "Private car/taxi", 3: "bicycle", 4: "Other"}[x], key='transportation')
+
+        col10, col11, col12 = st.columns(3)
+
+        with col10:
+            accommodation_type = st.selectbox("Accommodation type in Cyprus", options=[1, 2, 3, 4], format_func=lambda x: {1: "rental", 2: "dormitory", 3: "with family", 4: "Other"}[x], key='accommodation_type')
+
+        with col11:
+            mothers_education = st.selectbox("Mothers’ education", options=[1, 2, 3, 4, 5, 6], format_func=lambda x: {1: "primary school", 2: "secondary school", 3: "high school", 4: "university", 5: "MSc.", 6: "Ph.D."}[x], key='mothers_education')
+
+        with col12:
+            fathers_education = st.selectbox("Fathers’ education", options=[1, 2, 3, 4, 5, 6], format_func=lambda x: {1: "primary school", 2: "secondary school", 3: "high school", 4: "university", 5: "MSc.", 6: "Ph.D."}[x], key='fathers_education')
+
+        col13, col14, col15 = st.columns(3)
+
+        with col13:
+            siblings = st.selectbox("Number of sisters/brothers", options=[1, 2, 3, 4, 5], format_func=lambda x: {1: "1", 2: "2", 3: "3", 4: "4", 5: "5 or above"}[x], key='siblings')
+
+        with col14:
+            parental_status = st.selectbox("Parental status", options=[1, 2, 3], format_func=lambda x: {1: "married", 2: "divorced", 3: "died - one of them or both"}[x], key='parental_status')
+
+        with col15:
+            mother_occupation = st.selectbox("Mother occupation", options=[1, 2, 3, 4, 5, 6], format_func=lambda x: {1: "retired", 2: "housewife", 3: "government officer", 4: "private sector employee", 5: "self-employment", 6: "other"}[x], key='mother_occupation')
+
+        col16, col17, col18 = st.columns(3)
+
+        with col16:
+            father_occupation = st.selectbox("Father occupation", options=[1, 2, 3, 4, 5], format_func=lambda x: {1: "retired", 2: "government officer", 3: "private sector employee", 4: "self-employment", 5: "other"}[x], key='father_occupation')
+
+        with col17:
+            weekly_study_hours = st.selectbox("Weekly study hours", options=[1, 2, 3, 4, 5], format_func=lambda x: {1: "None", 2: "<5 hours", 3: "6-10 hours", 4: "11-20 hours", 5: "more than 20 hours"}[x], key='weekly_study_hours')
+
+        with col18:
+            reading_frequency_non_scientific = st.selectbox("Reading frequency (non-scientific books/journals)", options=[1, 2, 3], format_func=lambda x: {1: "None", 2: "Sometimes", 3: "Often"}[x], key='reading_frequency_non_scientific')
+
+        col19, col20, col21 = st.columns(3)
+
+        with col19:
+            reading_frequency_scientific = st.selectbox("Reading frequency (scientific books/journals)", options=[1, 2, 3], format_func=lambda x: {1: "None", 2: "Sometimes", 3: "Often"}[x], key='reading_frequency_scientific')
+
+        with col20:
+            seminars_conferences_attendance = st.selectbox("Attendance to the seminars/conferences related to the department", options=[1, 2], format_func=lambda x: {1: "Yes", 2: "No"}[x], key='seminars_conferences_attendance')
+
+        with col21:
+            projects_activities_impact = st.selectbox("Impact of your projects/activities on your success", options=[1, 2, 3], format_func=lambda x: {1: "positive", 2: "negative", 3: "neutral"}[x], key='projects_activities_impact')
+
+        col22, col23, col24 = st.columns(3)
+
+        with col22:
+            class_attendance = st.selectbox("Attendance to classes", options=[1, 2, 3], format_func=lambda x: {1: "always", 2: "sometimes", 3: "never"}[x], key='class_attendance')
+
+        with col23:
+            preparation_midterm_exams1 = st.selectbox("Preparation to midterm exams 1", options=[1, 2, 3], format_func=lambda x: {1: "alone", 2: "with friends", 3: "not applicable"}[x], key='preparation_midterm_exams1')
+
+        with col24:
+            preparation_midterm_exams2 = st.selectbox("Preparation to midterm exams 2", options=[1, 2, 3], format_func=lambda x: {1: "closest date to the exam", 2: "regularly during the semester", 3: "never"}[x], key='preparation_midterm_exams2')
+
+        col25, col26, col27 = st.columns(3)
+
+        with col25:
+            taking_notes = st.selectbox("Taking notes in classes", options=[1, 2, 3], format_func=lambda x: {1: "never", 2: "sometimes", 3: "always"}[x], key='taking_notes')
+
+        with col26:
+            listening_in_classes = st.selectbox("Listening in classes", options=[1, 2, 3], format_func=lambda x: {1: "never", 2: "sometimes", 3: "always"}[x], key='listening_in_classes')
+
+        with col27:
+            discussion_contribution = st.selectbox("Discussion improves my interest and success in the course", options=[1, 2, 3], format_func=lambda x: {1: "never", 2: "sometimes", 3: "always"}[x], key='discussion_contribution')
+
+        col28, col29, col30 = st.columns(3)
+
+        with col28:
+            flip_classroom_effectiveness = st.selectbox("Flip-classroom", options=[1, 2, 3], format_func=lambda x: {1: "not useful", 2: "useful", 3: "not applicable"}[x], key='flip_classroom_effectiveness')
+
+        with col29:
+            last_semester_gpa = st.selectbox("Cumulative grade point average in the last semester (/4.00)", options=[1, 2, 3, 4, 5], format_func=lambda x: {1: "<2.00", 2: "2.00-2.49", 3: "2.50-2.99", 4: "3.00-3.49", 5: "above 3.49"}[x], key='last_semester_gpa')
+
+        with col30:
+            expected_graduation_gpa = st.selectbox("Expected Cumulative grade point average in the graduation (/4.00)", options=[1, 2, 3, 4, 5], format_func=lambda x: {1: "<2.00", 2: "2.00-2.49", 3: "2.50-2.99", 4: "3.00-3.49", 5: "above 3.49"}[x], key='expected_graduation_gpa')
+
+        # Since course_id doesn't naturally fit into the pattern of three columns, you can place it separately or adjust the layout as needed.
+        course_id = st.selectbox("Course ID", options=[1, 2, 3, 4, 5, 6, 7, 8, 9], key='course_id')
     
 
         input_data = np.array([[student_age, sex, high_school_type, scholarship_type, additional_work, artistic_sports_activity, have_partner, total_salary, transportation, accommodation_type, mothers_education, fathers_education, siblings, parental_status, mother_occupation, father_occupation, weekly_study_hours, reading_frequency_non_scientific, reading_frequency_scientific, seminars_conferences_attendance, projects_activities_impact, class_attendance, preparation_midterm_exams1, preparation_midterm_exams2, taking_notes, listening_in_classes, discussion_contribution, flip_classroom_effectiveness, last_semester_gpa, expected_graduation_gpa, course_id]])
