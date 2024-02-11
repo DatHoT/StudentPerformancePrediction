@@ -193,9 +193,6 @@ def main():
         st.session_state['df'] = df
         #describe_attributes()
         explore_data(df)
-        # Initialize or load session state for models
-        if 'models' not in st.session_state or st.session_state is not None:
-            st.session_state.models = {}
         # Button to train and evaluate models
         if st.button('Train and Evaluate Models'):
             if 'df' in st.session_state and st.session_state['df'] is not None:
