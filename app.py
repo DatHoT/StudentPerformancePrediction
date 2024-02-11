@@ -186,8 +186,8 @@ def main():
 
         # Button to train and evaluate models
         if st.button('Train and Evaluate Models'):
-            if 'df' in globals():  # Check if df is loaded
-                st.session_state.models = train_and_evaluate_models(df)
+            if 'df' in st.session_state:  # Check if df is loaded
+                st.session_state.models = train_and_evaluate_models(st.session_state['df'])
                 st.write("Models trained and evaluated.")
             else:
                 st.write("Please upload a dataset first.")
