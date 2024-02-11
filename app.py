@@ -200,6 +200,7 @@ def main():
 
         # Debugging: Check the content of session_state['models'] after training
         if st.button('Debug: Show Models in Session State'):
+            st.write(st.session_state.models)
             if st.session_state.models:
                 for name in st.session_state.models:
                     st.write(f"Model stored: {name}")
