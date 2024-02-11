@@ -8,6 +8,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.impute import SimpleImputer
+import seaborn as sns
 
 # Function to load the dataset
 @st.cache_data()
