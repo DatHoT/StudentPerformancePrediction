@@ -20,6 +20,7 @@ from sklearn.preprocessing import LabelEncoder
 #     url = 'higher+education+students+performance+evaluation/Student_dataset.csv'
 #     return pd.read_csv(url)
 # Function to describe the attribute information
+
 def describe_attributes():
     st.write("## Data Set Characteristics")
     st.write("- The dataset contains information about various features of university students, aimed at predicting their end-of-term academic results.")
@@ -112,9 +113,6 @@ def train_and_evaluate_models(df):
     # Split the dataset
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    if 'models' not in st.session_state or st.session_state.models is None:
-        st.session_state.models = {}
-
     # Models to train
     models_to_train = {
         "Logistic Regression": LogisticRegression(max_iter=1000, random_state=42),
@@ -180,6 +178,8 @@ def main():
     st.title("Student Performance Prediction")
     uploaded_file = st.file_uploader("Upload the dataset")
     # Check if a file has been uploaded
+    if 'models' not in st.session_state:
+        st.session_state['models'] = {}
     if uploaded_file is not None:
         df = pd.read_csv(uploaded_file)
         st.session_state['df'] = df
@@ -191,29 +191,20 @@ def main():
 
         # Button to train and evaluate models
         if st.button('Train and Evaluate Models'):
-            if 'df' in st.session_state:  # Check if df is loaded
-                st.session_state.models = train_and_evaluate_models(st.session_state['df'])
-                st.write("Models trained and evaluated.")
+            if 'df' in st.session_state and st.session_state['df'] is not None:
+                models_trained = train_and_evaluate_models(st.session_state['df'])
+                st.session_state['models'] = models_trained  # Re-assign to ensure update
+                st.write("Models trained and saved in session state.")
             else:
                 st.write("Please upload a dataset first.")
 
-        # Assuming you want to save all models, iterate through the models in session state
-        if st.button('Save Models'):
-            # Debugging: Check if 'models' key exists in session_state
-            if 'models' in st.session_state:
-                st.write("Found 'models' in session_state.")
-                
-                # Debugging: Check if models are stored
-                if st.session_state.models:
-                    st.write(f"Models to save: {list(st.session_state.models.keys())}")
-                    for name, model in st.session_state.models.items():
-                        filename = f"{name.replace(' ', '_')}.pkl"
-                        save_model(model, filename)
-                        st.write(f"{name} model saved.")
-                else:
-                    st.write("But, 'models' is empty.")
+        # Debugging: Check the content of session_state['models'] after training
+        if st.button('Debug: Show Models in Session State'):
+            if st.session_state.models:
+                for name in st.session_state.models:
+                    st.write(f"Model stored: {name}")
             else:
-                st.write("No 'models' key found in session_state. No models to save.")
+                st.write("No models stored in session state.")
 
         st.write("### House Price Prediction")
         st.write("Enter the following features to get the predicted price:")
