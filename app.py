@@ -198,7 +198,6 @@ def main():
             if 'df' in st.session_state and st.session_state['df'] is not None:
                 models_trained = train_and_evaluate_models(st.session_state['df'])
                 st.session_state['models'] = models_trained  # Re-assign to ensure update
-                st.write(st.session_state['models'])
             else:
                 st.write("Please upload a dataset first.")
 
@@ -242,10 +241,8 @@ def main():
 
 
         if st.button("Predict Price"):
-            st.write(st.session_state.models)
-            st.write(st.session_state)
-            for name in models_trained:
-                prediction = models_trained[name].predict(input_data)
+            for name in st.session_state.models:
+                prediction = st.session_state.models[name].predict(input_data)
                 st.write("### Predicted House Price using "+name+" :", prediction)
     else: 
         st.write("Please upload a file to proceed.")
