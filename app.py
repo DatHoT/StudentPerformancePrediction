@@ -184,6 +184,7 @@ def main():
     st.title("Student Performance Prediction")
     uploaded_file = st.file_uploader("Upload the dataset")
     # Check if a file has been uploaded
+    models_trained = []
     if 'models' not in st.session_state:
         st.session_state['models'] = {}
     if uploaded_file is not None:
@@ -195,7 +196,6 @@ def main():
         # Initialize or load session state for models
         if 'models' not in st.session_state or st.session_state is not None:
             st.session_state.models = {}
-        models_trained = []
         # Button to train and evaluate models
         if st.button('Train and Evaluate Models'):
             if 'df' in st.session_state and st.session_state['df'] is not None:
