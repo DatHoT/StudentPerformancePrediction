@@ -245,6 +245,7 @@ def main():
 
 
         if st.button("Predict Price"):
+            st.write(models_trained)
             for name in models_trained:
                 prediction = predict_price(models_trained[name], input_data)
                 st.write("### Predicted House Price using "+name+" :", prediction)
