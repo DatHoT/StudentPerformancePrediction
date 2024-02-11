@@ -202,8 +202,6 @@ def main():
                 models_trained = train_and_evaluate_models(st.session_state['df'])
                 st.session_state['models'] = models_trained  # Re-assign to ensure update
                 st.write(models_trained)
-                for name in models_trained:
-                    save_model(models_trained[name],name)
             else:
                 st.write("Please upload a dataset first.")
 
@@ -247,11 +245,9 @@ def main():
 
 
         if st.button("Predict Price"):
-            prediction = predict_price(model, input_data)
-            st.write("### Predicted House Price using LinearRegression:", prediction)
-
-            prediction = predict_priceR(modelR, input_data)
-            st.write("### Predicted House Price using RandomForest:", prediction)
+            for name in models_trained:
+                st.write("### Predicted House Price using "+name+" :", prediction)
+                prediction = predict_price(models_trained[name], input_data)
     else: 
         st.write("Please upload a file to proceed.")
 
