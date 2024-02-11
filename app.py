@@ -186,7 +186,7 @@ def main():
         #describe_attributes()
         explore_data(df)
         # Initialize or load session state for models
-        if 'models' not in st.session_state:
+        if 'models' not in st.session_state or st.session_state is not None:
             st.session_state.models = {}
 
         # Button to train and evaluate models
