@@ -12,9 +12,9 @@ import seaborn as sns
 
 # Function to load the dataset
 @st.cache_data()
-def load_data():
-    url = 'higher+education+students+performance+evaluation/Student_dataset.csv'
-    return pd.read_csv(url)
+# def load_data():
+#     url = 'higher+education+students+performance+evaluation/Student_dataset.csv'
+#     return pd.read_csv(url)
 # Function to describe the attribute information
 def describe_attributes():
     st.write("## Data Set Characteristics")
@@ -86,15 +86,6 @@ def explore_data(df):
     ax.set_xlabel('Gender')
     ax.set_ylabel('Frequency')
     ax.set_xticklabels(['Female', 'Male'], rotation=0)
-    st.pyplot(fig)
-
-    st.write("#### Correlation Heatmap")
-    # Select only numeric columns for correlation calculation
-    numeric_df = df.select_dtypes(include=[np.number])
-    corr_matrix = numeric_df.corr()
-    fig, ax = plt.subplots(figsize=(10, 8))
-    sns.heatmap(corr_matrix, ax=ax, cmap='coolwarm', annot=True, fmt=".2f")
-    ax.set_title('Correlation Heatmap')
     st.pyplot(fig)
 
 # Function to save the trained model
@@ -178,37 +169,42 @@ def visualize_prediction(df, predicted_prices):
 
 def main():
     st.title("House Price Prediction")
-    df = load_data()
-    #describe_attributes()
-    explore_data(df)
-    model = train_model(df)
-    modelR = train_modelR(df)
+    uploaded_file = st.file_uploader("Choose a file")
+    # Check if a file has been uploaded
+    if uploaded_file is not None:
+        df = pd.read_csv(uploaded_file)
+        #describe_attributes()
+        explore_data(df)
+        model = train_model(df)
+        modelR = train_modelR(df)
 
-    st.write("### House Price Prediction")
-    st.write("Enter the following features to get the predicted price:")
-    crim = st.number_input("CRIM - Per Capita Crime Rate:", value=0.0, step=0.01)
-    zn = st.number_input("ZN - Proportion of Residential Land Zoned:", value=0.0, step=0.5)
-    indus = st.number_input("INDUS - Proportion of Non-Retail Business Acres:", value=0.0, step=0.01)
-    chas = st.selectbox("CHAS - Charles River Dummy Variable:", options=[0, 1])
-    nox = st.number_input("NOX - Nitric Oxides Concentration (parts per 10 million):", value=0.0, step=0.01)
-    rm = st.number_input("RM - Average Number of Rooms per Dwelling:", value=0.0, step=0.01)
-    age = st.number_input("AGE - Proportion of Owner-Occupied Units Built Prior to 1940:", value=0.0, step=0.01)
-    dis = st.number_input("DIS - Weighted Distances to Five Boston Employment Centers:", value=0.0, step=0.01)
-    rad = st.number_input("RAD - Index of Accessibility to Radial Highways:", value=0.0, step=1.0)
-    tax = st.number_input("TAX - Full-Value Property Tax Rate per $10,000:", value=0.0, step=1.0)
-    ptratio = st.number_input("PTRATIO - Pupil-Teacher Ratio by Town:", value=0.0, step=0.01)
-    b = st.number_input("B - Proportion of Blacks:", value=0.0, step=0.01)
-    lstat = st.number_input("LSTAT - Percentage of Lower Status of the Population:", value=0.0, step=0.01)
-    medv = st.number_input("Median value of owner-occupied homes in $1000's:", value=0.0, step=0.01)
+        st.write("### House Price Prediction")
+        st.write("Enter the following features to get the predicted price:")
+        crim = st.number_input("CRIM - Per Capita Crime Rate:", value=0.0, step=0.01)
+        zn = st.number_input("ZN - Proportion of Residential Land Zoned:", value=0.0, step=0.5)
+        indus = st.number_input("INDUS - Proportion of Non-Retail Business Acres:", value=0.0, step=0.01)
+        chas = st.selectbox("CHAS - Charles River Dummy Variable:", options=[0, 1])
+        nox = st.number_input("NOX - Nitric Oxides Concentration (parts per 10 million):", value=0.0, step=0.01)
+        rm = st.number_input("RM - Average Number of Rooms per Dwelling:", value=0.0, step=0.01)
+        age = st.number_input("AGE - Proportion of Owner-Occupied Units Built Prior to 1940:", value=0.0, step=0.01)
+        dis = st.number_input("DIS - Weighted Distances to Five Boston Employment Centers:", value=0.0, step=0.01)
+        rad = st.number_input("RAD - Index of Accessibility to Radial Highways:", value=0.0, step=1.0)
+        tax = st.number_input("TAX - Full-Value Property Tax Rate per $10,000:", value=0.0, step=1.0)
+        ptratio = st.number_input("PTRATIO - Pupil-Teacher Ratio by Town:", value=0.0, step=0.01)
+        b = st.number_input("B - Proportion of Blacks:", value=0.0, step=0.01)
+        lstat = st.number_input("LSTAT - Percentage of Lower Status of the Population:", value=0.0, step=0.01)
+        medv = st.number_input("Median value of owner-occupied homes in $1000's:", value=0.0, step=0.01)
 
-    input_data = np.array([[crim, zn, indus, chas, nox, rm, age, dis, rad, tax, ptratio, b, lstat, medv]])
+        input_data = np.array([[crim, zn, indus, chas, nox, rm, age, dis, rad, tax, ptratio, b, lstat, medv]])
 
-    if st.button("Predict Price"):
-        prediction = predict_price(model, input_data)
-        st.write("### Predicted House Price using LinearRegression:", prediction)
+        if st.button("Predict Price"):
+            prediction = predict_price(model, input_data)
+            st.write("### Predicted House Price using LinearRegression:", prediction)
 
-        prediction = predict_priceR(modelR, input_data)
-        st.write("### Predicted House Price using RandomForest:", prediction)
+            prediction = predict_priceR(modelR, input_data)
+            st.write("### Predicted House Price using RandomForest:", prediction)
+    else: 
+        st.write("Please upload a file to proceed.")
 
 if __name__ == "__main__":
     main()
