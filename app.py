@@ -131,7 +131,7 @@ def train_and_evaluate_models(df):
         y_pred = model.predict(X_test)
 
         # Calculate metrics
-        accuracy = accuracy_score(y_test, y_pred, average='weighted')
+        accuracy = accuracy_score(y_test, y_pred)
         precision = precision_score(y_test, y_pred, average='weighted', zero_division=0)
         recall = recall_score(y_test, y_pred, average='weighted')
         f1 = f1_score(y_test, y_pred, average='weighted')
