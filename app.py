@@ -141,7 +141,7 @@ def train_and_evaluate_models(df):
         st.write(f"Recall: {recall:.4f}")
         st.write(f"F1 Score: {f1:.4f}")
         st.write(f"Accuracy: {accuracy:.4f}")
-        
+
         trained_models[name] = model
     # st.session_state['models'] = models
     # st.write("Models stored in session_state['models']")
@@ -166,19 +166,6 @@ def save_model(model, filename):
 # def predict_priceR(modelR, input_data):
 #     predictionR = modelR.predict(input_data)
 #     return predictionR
-
-# Function to visualize the predicted prices
-def visualize_prediction(df, predicted_prices):
-    sorted_indices = np.argsort(df['RM'])
-    sorted_predicted_prices = predicted_prices.flatten()[sorted_indices]
-
-    fig, ax = plt.subplots()
-    ax.scatter(df['RM'], df['PRICE'], label='Actual')
-    ax.scatter(df['RM'].iloc[sorted_indices], sorted_predicted_prices, color='red', label='Predicted')
-    ax.set_xlabel('RM')
-    ax.set_ylabel('PRICE')
-    ax.legend()
-    st.pyplot(fig)
 
 def main():
     st.title("Student Performance Prediction")
@@ -329,10 +316,10 @@ def main():
         # # Encode categorical variables (assuming all are categorical or have been handled appropriately)
         # X = pd.get_dummies(X, drop_first=True)
 
-        if st.button("Predict Price"):
+        if st.button("Predict Performance"):
             for name in st.session_state.models:
                 prediction = st.session_state.models[name].predict(input_data)
-                st.write("### Predicted House Price using "+name+" :", prediction)
+                st.write("### Predicted Student's Performance using "+name+" :", prediction)
     else: 
         st.write("Please upload a file to proceed.")
 
