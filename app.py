@@ -23,49 +23,51 @@ from sklearn.preprocessing import LabelEncoder
 # Function to describe the attribute information
 
 def describe_attributes():
-    st.write("## Data Set Characteristics")
-    st.write("- The dataset contains information about various features of university students, aimed at predicting their end-of-term academic results.")
-    st.write("- It includes personal, family, and academic attributes such as age, sex, high-school type, scholarship type, study hours, reading frequency, and more.")
-    st.write("- The target variable is the students' grades, categorized into several classes ranging from 'Fail' to 'AA'.")
-    st.write("- The dataset consists of 145 instances and 31 input features.")
+    st.write("## Đặc điểm Bộ Dữ Liệu")
+    st.write("- Bộ dữ liệu bao gồm thông tin về các đặc điểm khác nhau của sinh viên Đại học Duy Tân, nhằm dự đoán điểm trung bình tích lũy (GPA) của họ.")
+    st.write("- Bộ dữ liệu bao gồm các thuộc tính cá nhân như tuổi, giới tính, năm học, loại trường phổ thông tốt nghiệp, và tình trạng học bổng, cũng như hoạt động làm việc bán thời gian và tham gia hoạt động ngoại khóa.")
+    st.write("- Biến mục tiêu là điểm GPA của sinh viên, được phân loại theo số.")
+    st.write("- Bộ dữ liệu gồm 225 mục nhập và 34 thuộc tính đầu vào.")
     st.write('===================================================================')
-    st.write("## Attribute Information")
-    st.write("1- Student Age (1: 18-21, 2: 22-25, 3: above 26)")
-    st.write("2- Sex (1: female, 2: male)")
-    st.write("3- Graduated high-school type: (1: private, 2: state, 3: other)")
-    st.write("4- Scholarship type: (1: None, 2: 25%, 3: 50%, 4: 75%, 5: Full)")
-    st.write("5- Additional work: (1: Yes, 2: No)")
-    st.write("6- Regular artistic or sports activity: (1: Yes, 2: No)")
-    st.write("7- Do you have a partner: (1: Yes, 2: No)")
-    st.write("8- Total salary if available (1: USD 135-200, 2: USD 201-270, 3: USD 271-340, 4: USD 341-410, 5: above 410)")
-    st.write("9- Transportation to the university: (1: Bus, 2: Private car/taxi, 3: bicycle, 4: Other)")
-    st.write("10- Accommodation type in Cyprus: (1: rental, 2: dormitory, 3: with family, 4: Other)")
-    st.write("11- Mothers’ education: (1: primary school, 2: secondary school, 3: high school, 4: university, 5: MSc., 6: Ph.D.)")
-    st.write("12- Fathers’ education: (1: primary school, 2: secondary school, 3: high school, 4: university, 5: MSc., 6: Ph.D.)")
-    st.write("13- Number of sisters/brothers (if available): (1: 1, 2:, 2, 3: 3, 4: 4, 5: 5 or above)")
-    st.write("14- Parental status: (1: married, 2: divorced, 3: died - one of them or both)")
-    st.write("15- Mother occupation: (1: retired, 2: housewife, 3: government officer, 4: private sector employee, 5: self-employment, 6: other)")
-    st.write("16- Father occupation: (1: retired, 2: government officer, 3: private sector employee, 4: self-employment, 5: other)")
-    st.write("17- Weekly study hours: (1: None, 2: <5 hours, 3: 6-10 hours, 4: 11-20 hours, 5: more than 20 hours)")
-    st.write("18- Reading frequency (non-scientific books/journals): (1: None, 2: Sometimes, 3: Often)")
-    st.write("19- Reading frequency (scientific books/journals): (1: None, 2: Sometimes, 3: Often)")
-    st.write("20- Attendance to the seminars/conferences related to the department: (1: Yes, 2: No)")
-    st.write("21- Impact of your projects/activities on your success: (1: positive, 2: negative, 3: neutral)")
-    st.write("22- Attendance to classes (1: always, 2: sometimes, 3: never)")
-    st.write("23- Preparation to midterm exams 1: (1: alone, 2: with friends, 3: not applicable)")
-    st.write("24- Preparation to midterm exams 2: (1: closest date to the exam, 2: regularly during the semester, 3: never)")
-    st.write("25- Taking notes in classes: (1: never, 2: sometimes, 3: always)")
-    st.write("26- Listening in classes: (1: never, 2: sometimes, 3: always)")
-    st.write("27- Discussion improves my interest and success in the course: (1: never, 2: sometimes, 3: always)")
-    st.write("28- Flip-classroom: (1: not useful, 2: useful, 3: not applicable)")
-    st.write("29- Cumulative grade point average in the last semester (/4.00): (1: <2.00, 2: 2.00-2.49, 3: 2.50-2.99, 4: 3.00-3.49, 5: above 3.49)")
-    st.write("30- Expected Cumulative grade point average in the graduation (/4.00): (1: <2.00, 2: 2.00-2.49, 3: 2.50-2.99, 4: 3.00-3.49, 5: above 3.49)")
-    st.write("31- Course ID")
-    st.write("32- OUTPUT Grade (0: Fail, 1: DD, 2: DC, 3: CC, 4: CB, 5: BB, 6: BA, 7: AA)")
+    st.write("## Thông Tin Thuộc Tính")
+    st.write("1- Thời gian hoàn thành khảo sát")
+    st.write("2- Tuổi của sinh viên")
+    st.write("3- Giới tính")
+    st.write("4- Năm học hiện tại")
+    st.write("5- Loại trường phổ thông đã tốt nghiệp")
+    st.write("6- Tình trạng học bổng năm ngoái")
+    st.write("7- Tình trạng làm việc bán thời gian")
+    st.write("8- Tham gia hoạt động nghệ thuật hoặc thể thao")
+    st.write("9- Tình trạng hôn nhân")
+    st.write("10- Tổng thu nhập hiện tại (từ việc làm thêm hoặc đã có việc làm)")
+    st.write("11- Phương tiện đi lại đến trường")
+    st.write("12- Loại chỗ ở hiện tại")
+    st.write("13- Trình độ học vấn của mẹ")
+    st.write("14- Trình độ học vấn của cha")
+    st.write("15- Số lượng anh chị em")
+    st.write("16- Tình trạng hôn nhân của cha mẹ")
+    st.write("17- Nghề nghiệp của mẹ")
+    st.write("18- Nghề nghiệp của cha")
+    st.write("19- Số giờ học trung bình mỗi tuần")
+    st.write("20- Tần suất đọc sách/báo không liên quan đến chuyên ngành")
+    st.write("21- Tần suất đọc sách/báo liên quan đến chuyên ngành")
+    st.write("22- Tham gia thường xuyên các hội thảo/hội nghị liên quan đến ngành")
+    st.write("23- Ảnh hưởng của dự án/hoạt động cá nhân đến việc học")
+    st.write("24- Điều đặn đi học")
+    st.write("25- Người bạn học chung khi chuẩn bị cho kỳ thi")
+    st.write("26- Thời gian ôn tập chuẩn bị cho kỳ thi")
+    st.write("27- Ghi chú trong lớp")
+    st.write("28- Tập trung nghe giảng trong lớp")
+    st.write("29- Quan điểm về 'Tham gia thảo luận giúp tôi tập trung và thành công hơn trong khóa học'")
+    st.write("30- Đánh giá về phương pháp lớp học đảo ngược (học tại nhà, thảo luận tại lớp)")
+    st.write("31- GPA gần nhất")
+    st.write("32- GPA mong đợi khi tốt nghiệp")
+    st.write("33- Trình độ tiếng Anh hiện tại")
+    st.write("34- Ngành và lĩnh vực học tập")
     st.write('===================================================================')
-# Function to explore the dataset
+
+
 def explore_data(df):
-    describe_attributes()
     st.write("### Dataset Summary")
     st.write(df.head())
     st.write("### Dataset Shape")
@@ -73,42 +75,42 @@ def explore_data(df):
     st.write("### Dataset Description")
     st.write(df.describe())
 
-     # Data visualization
+    # Data Visualization
     st.write("### Data Visualization")
     st.write("#### Histogram for Age Groups")
     fig, ax = plt.subplots()
-    # Assuming '1' is the column for student age groups
-    counts, bins, patches = ax.hist(df['1'], bins=range(1, 5), rwidth=0.8, align='left')
+    # Plotting the histogram for age groups directly from the categorical data
+    age_group_counts = df['Tuổi của bạn'].value_counts()
+    age_group_counts.plot(kind='bar', ax=ax)
     ax.set_xlabel('Age Groups')
     ax.set_ylabel('Frequency')
-    # Set x-ticks to be at the center of each bin
-    ax.set_xticks(np.arange(1, 4) + 0.5)
-    ax.set_xticklabels(['18-21', '22-25', 'above 26'])
+    ax.set_xticklabels(age_group_counts.index, rotation=0)
     st.pyplot(fig)
 
     st.write("#### Gender Distribution")
     fig, ax = plt.subplots()
-    df['2'].value_counts().plot(kind='bar', ax=ax)  # Assuming '2' is the column for sex (1: female, 2: male)
+    # Plotting the bar chart for gender distribution
+    gender_counts = df['Giới tính'].value_counts()
+    gender_counts.plot(kind='bar', ax=ax)
     ax.set_xlabel('Gender')
     ax.set_ylabel('Frequency')
-    ax.set_xticklabels(['Female', 'Male'], rotation=0)
+    ax.set_xticklabels(gender_counts.index, rotation=0)
     st.pyplot(fig)
-
-# Function to save the trained model
-def save_model(model, filename):
-    with open(filename, 'wb') as file:
-        pickle.dump(model, file)
 
 # Function to train and evaluate the model Randomforest
 def train_and_evaluate_models(df):
 
     # Assuming 'GRADE' is the target variable
-    X = df.drop(['GRADE','STUDENT ID'], axis=1)
-    y = df['GRADE']
-    # Preprocessing steps (if not already done)
+    X = df.drop(['Điểm trung bình tích lũy (GPA) trong học kỳ gần nhất của bạn là gì?', 'Timestamp'], axis=1)
+    y = df['Điểm trung bình tích lũy (GPA) trong học kỳ gần nhất của bạn là gì?']
+
     # Encode categorical variables (assuming all are categorical or have been handled appropriately)
     X = pd.get_dummies(X, drop_first=True)
     
+    # Save the feature columns in session state for later use during prediction
+    if 'feature_columns' not in st.session_state:
+        st.session_state['feature_columns'] = X.columns.tolist()
+
     # Split the dataset
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
@@ -120,11 +122,11 @@ def train_and_evaluate_models(df):
     }
 
     trained_models = {}
+    st.session_state.models = {}
 
     # Train and evaluate models
     for name, model in models_to_train.items():
         model.fit(X_train, y_train)
-        st.session_state.models = {}
         # Directly update session state with each trained model
         st.session_state.models[name] = model
         y_pred = model.predict(X_test)
@@ -143,8 +145,7 @@ def train_and_evaluate_models(df):
         st.write(f"Accuracy: {accuracy:.4f}")
 
         trained_models[name] = model
-    # st.session_state['models'] = models
-    # st.write("Models stored in session_state['models']")
+
     return trained_models
 
 def save_model(model, filename):
@@ -177,7 +178,7 @@ def main():
     if uploaded_file is not None:
         df = pd.read_csv(uploaded_file)
         st.session_state['df'] = df
-        #describe_attributes()
+        describe_attributes()
         explore_data(df)
         # Button to train and evaluate models
         st.write("### Model Training and Evaluation")
@@ -194,119 +195,181 @@ def main():
         col1, col2, col3 = st.columns(3)
 
         with col1:
-            student_age = st.selectbox("Student Age", options=[1, 2, 3], format_func=lambda x: {1: "18-21", 2: "22-25", 3: "above 26"}[x], key='student_age')
+            student_age = st.selectbox("Tuổi của bạn", options=['18-21', '22-25', 'trên 26'], key='student_age')
 
         with col2:
-            sex = st.selectbox("Sex", options=[1, 2], format_func=lambda x: {1: "female", 2: "male"}[x], key='sex')
+            sex = st.selectbox("Giới tính", options=['Nữ', 'Nam', 'Khác'], key='sex')
 
         with col3:
-            high_school_type = st.selectbox("Graduated high-school type", options=[1, 2, 3], format_func=lambda x: {1: "private", 2: "state", 3: "other"}[x], key='high_school_type')
+            year_in_school = st.selectbox("Bạn hiện đang là sinh viên năm thứ mấy?", options=[1, 2, 3, 4], key='year_in_school')
 
         col4, col5, col6 = st.columns(3)
 
         with col4:
-            scholarship_type = st.selectbox("Scholarship type", options=[1, 2, 3, 4, 5], format_func=lambda x: {1: "None", 2: "25%", 3: "50%", 4: "75%", 5: "Full"}[x], key='scholarship_type')
+            high_school_type = st.selectbox("Loại trường THPT mà bạn tốt nghiệp là gì?", options=['Công lập', 'Tư thục', 'Trường chuyên'], key='high_school_type')
 
         with col5:
-            additional_work = st.selectbox("Additional work", options=[1, 2], format_func=lambda x: {1: "Yes", 2: "No"}[x], key='additional_work')
+            scholarship_type = st.selectbox("Năm học qua Bạn có học bổng hay không?", options=['Không', 'Toàn phần', '25%', '50%', '75%'], key='scholarship_type')
 
         with col6:
-            artistic_sports_activity = st.selectbox("Regular artistic or sports activity", options=[1, 2], format_func=lambda x: {1: "Yes", 2: "No"}[x], key='artistic_sports_activity')
+            part_time_job = st.selectbox("Bạn có làm việc bán thời gian hay không?", options=['Có', 'Không'], key='part_time_job')
 
-            # Continuing with the next row of inputs
         col7, col8, col9 = st.columns(3)
 
         with col7:
-            have_partner = st.selectbox("Do you have a partner", options=[1, 2], format_func=lambda x: {1: "Yes", 2: "No"}[x], key='have_partner')
+            artistic_sports_activity = st.selectbox("Bạn có tham gia hoạt động nghệ thuật hoặc các môn thể thao đều đặn hay không?", options=['Có', 'Không'], key='artistic_sports_activity')
 
         with col8:
-            total_salary = st.selectbox("Total salary if available", options=[1, 2, 3, 4, 5], format_func=lambda x: {1: "USD 135-200", 2: "USD 201-270", 3: "USD 271-340", 4: "USD 341-410", 5: "above 410"}[x], key='total_salary')
+            marital_status = st.selectbox("Bạn đã lập gia đình chưa?", options=['Chưa', 'Có'], key='marital_status')
 
         with col9:
-            transportation = st.selectbox("Transportation to the university", options=[1, 2, 3, 4], format_func=lambda x: {1: "Bus", 2: "Private car/taxi", 3: "bicycle", 4: "Other"}[x], key='transportation')
+            total_income = st.selectbox("Tổng thu nhập hiện tại của bạn là bao nhiêu?", options=['Dưới 2 triệu', 'Không có', 'Trên 2 triệu'], key='total_income')
 
         col10, col11, col12 = st.columns(3)
 
         with col10:
-            accommodation_type = st.selectbox("Accommodation type in Cyprus", options=[1, 2, 3, 4], format_func=lambda x: {1: "rental", 2: "dormitory", 3: "with family", 4: "Other"}[x], key='accommodation_type')
+            transportation = st.selectbox("Phương tiện di chuyển đến trường là gì?", options=['Xe máy', 'Xe đạp', 'Xe ô tô', 'Khác'], key='transportation')
 
         with col11:
-            mothers_education = st.selectbox("Mothers’ education", options=[1, 2, 3, 4, 5, 6], format_func=lambda x: {1: "primary school", 2: "secondary school", 3: "high school", 4: "university", 5: "MSc.", 6: "Ph.D."}[x], key='mothers_education')
+            accommodation_type = st.selectbox("Loại chỗ hiện tại của bạn là gì?", options=['Thuê nhà', 'Với gia đình', 'Khác', 'Ký túc xá'], key='accommodation_type')
 
         with col12:
-            fathers_education = st.selectbox("Fathers’ education", options=[1, 2, 3, 4, 5, 6], format_func=lambda x: {1: "primary school", 2: "secondary school", 3: "high school", 4: "university", 5: "MSc.", 6: "Ph.D."}[x], key='fathers_education')
+            mother_education_level = st.selectbox("Trình độ học vấn của mẹ bạn là gì?", options=['Tiểu học', 'Trung học cơ sở', 'Trung học phổ thông', 'Đại học', 'Thạc sĩ', 'Tiến sĩ', 'Khác'], key='mother_education_level')
 
         col13, col14, col15 = st.columns(3)
 
         with col13:
-            siblings = st.selectbox("Number of sisters/brothers", options=[1, 2, 3, 4, 5], format_func=lambda x: {1: "1", 2: "2", 3: "3", 4: "4", 5: "5 or above"}[x], key='siblings')
+            father_education_level = st.selectbox("Trình độ Học vấn của Ba bạn là gì?", options=['Tiểu học', 'Trung học cơ sở', 'Trung học phổ thông', 'Đại học', 'Thạc sĩ', 'Tiến sĩ', 'Khác'], key='father_education_level')
 
         with col14:
-            parental_status = st.selectbox("Parental status", options=[1, 2, 3], format_func=lambda x: {1: "married", 2: "divorced", 3: "died - one of them or both"}[x], key='parental_status')
+            siblings = st.selectbox("Số anh chị em của Bạn", options=['1', '2', '3', '4', 'Không có', '5 trở lên'], key='siblings')
 
         with col15:
-            mother_occupation = st.selectbox("Mother occupation", options=[1, 2, 3, 4, 5, 6], format_func=lambda x: {1: "retired", 2: "housewife", 3: "government officer", 4: "private sector employee", 5: "self-employment", 6: "other"}[x], key='mother_occupation')
+            parental_status = st.selectbox("Tình trạng hôn nhân của cha mẹ bạn là gì?", options=['Đã kết hôn', 'Đã ly hôn', 'Đã mất - một trong hai hoặc cả hai'], key='parental_status')
 
         col16, col17, col18 = st.columns(3)
 
         with col16:
-            father_occupation = st.selectbox("Father occupation", options=[1, 2, 3, 4, 5], format_func=lambda x: {1: "retired", 2: "government officer", 3: "private sector employee", 4: "self-employment", 5: "other"}[x], key='father_occupation')
+            mother_occupation = st.selectbox("Nghề nghiệp của mẹ", options=['Khác', 'Công chức, nhân viên', 'Tự kinh doanh', 'Đã nghỉ hưu', 'Nội trợ', 'Lãnh đạo'], key='mother_occupation')
 
         with col17:
-            weekly_study_hours = st.selectbox("Weekly study hours", options=[1, 2, 3, 4, 5], format_func=lambda x: {1: "None", 2: "<5 hours", 3: "6-10 hours", 4: "11-20 hours", 5: "more than 20 hours"}[x], key='weekly_study_hours')
+            father_occupation = st.selectbox("Nghề nghiệp của cha", options=['Khác', 'Công chức', 'Tự kinh doanh', 'Quản lý', 'Đã nghỉ hưu', 'Lãnh đạo'], key='father_occupation')
 
         with col18:
-            reading_frequency_non_scientific = st.selectbox("Reading frequency (non-scientific books/journals)", options=[1, 2, 3], format_func=lambda x: {1: "None", 2: "Sometimes", 3: "Often"}[x], key='reading_frequency_non_scientific')
+            weekly_study_hours = st.selectbox("Trung bình số giờ học mỗi tuần của bạn (giờ học trên lớp)", options=['<5 giờ', '6-10 giờ', '11-20 giờ', 'hơn 20 giờ'], key='weekly_study_hours')
 
         col19, col20, col21 = st.columns(3)
 
         with col19:
-            reading_frequency_scientific = st.selectbox("Reading frequency (scientific books/journals)", options=[1, 2, 3], format_func=lambda x: {1: "None", 2: "Sometimes", 3: "Often"}[x], key='reading_frequency_scientific')
+            non_academic_reading = st.selectbox("Tần suất đọc sách/báo không liên quan đến chuyên ngành mà bạn đang học", options=['Không', 'Thỉnh thoảng', 'Thường xuyên'], key='non_academic_reading')
 
         with col20:
-            seminars_conferences_attendance = st.selectbox("Attendance to the seminars/conferences related to the department", options=[1, 2], format_func=lambda x: {1: "Yes", 2: "No"}[x], key='seminars_conferences_attendance')
+            academic_reading = st.selectbox("Tần suất đọc sách/báo liên quan đến chuyên ngành mà bạn đang học", options=['Không', 'Thỉnh thoảng', 'Thường xuyên'], key='academic_reading')
 
         with col21:
-            projects_activities_impact = st.selectbox("Impact of your projects/activities on your success", options=[1, 2, 3], format_func=lambda x: {1: "positive", 2: "negative", 3: "neutral"}[x], key='projects_activities_impact')
+            seminar_attendance = st.selectbox("Bạn có tham dự hội thảo/hội nghị liên quan đến ngành thường xuyên hay không", options=['Không', 'Có'], key='seminar_attendance')
 
         col22, col23, col24 = st.columns(3)
 
         with col22:
-            class_attendance = st.selectbox("Attendance to classes", options=[1, 2, 3], format_func=lambda x: {1: "always", 2: "sometimes", 3: "never"}[x], key='class_attendance')
+            personal_project_impact = st.selectbox("Ảnh hưởng của dự án/hoạt động cá nhân lên việc học của bạn", options=['Tiêu cực', 'Trung lập', 'Tích cực'], key='personal_project_impact')
 
         with col23:
-            preparation_midterm_exams1 = st.selectbox("Preparation to midterm exams 1", options=[1, 2, 3], format_func=lambda x: {1: "alone", 2: "with friends", 3: "not applicable"}[x], key='preparation_midterm_exams1')
+            class_attendance = st.selectbox("Bạn có đi học đều đặn không?", options=['Luôn luôn', 'Thỉnh thoảng'], key='class_attendance')
 
         with col24:
-            preparation_midterm_exams2 = st.selectbox("Preparation to midterm exams 2", options=[1, 2, 3], format_func=lambda x: {1: "closest date to the exam", 2: "regularly during the semester", 3: "never"}[x], key='preparation_midterm_exams2')
+            exam_preparation_with = st.selectbox("Để chuẩn bị cho kỳ thi thì bạn hay học với ai?", options=['Một mình', 'Với bạn bè', 'Không áp dụng'], key='exam_preparation_with')
 
         col25, col26, col27 = st.columns(3)
 
         with col25:
-            taking_notes = st.selectbox("Taking notes in classes", options=[1, 2, 3], format_func=lambda x: {1: "never", 2: "sometimes", 3: "always"}[x], key='taking_notes')
+            exam_timing_preparation = st.selectbox("Thời điểm mà bạn ôn thi để chuẩn bị cho kỳ thi là?", options=['Ngày gần nhất với kỳ thi', 'Đều đặn suốt học kỳ', 'Không bao giờ ôn tập'], key='exam_timing_preparation')
 
         with col26:
-            listening_in_classes = st.selectbox("Listening in classes", options=[1, 2, 3], format_func=lambda x: {1: "never", 2: "sometimes", 3: "always"}[x], key='listening_in_classes')
+            note_taking = st.selectbox("Bạn có ghi chú khi học trên lớp không?", options=['Không bao giờ', 'Thỉnh thoảng', 'Luôn luôn'], key='note_taking')
 
         with col27:
-            discussion_contribution = st.selectbox("Discussion improves my interest and success in the course", options=[1, 2, 3], format_func=lambda x: {1: "never", 2: "sometimes", 3: "always"}[x], key='discussion_contribution')
+            class_listening = st.selectbox("Bạn có tập trung nghe giảng trong lớp không?", options=['Không bao giờ', 'Thỉnh thoảng', 'Luôn luôn'], key='class_listening')
 
         col28, col29, col30 = st.columns(3)
 
         with col28:
-            flip_classroom_effectiveness = st.selectbox("Flip-classroom", options=[1, 2, 3], format_func=lambda x: {1: "not useful", 2: "useful", 3: "not applicable"}[x], key='flip_classroom_effectiveness')
+            class_discussion_impact = st.selectbox("Bạn nghĩ thể nào về quan điểm 'Phát biểu thảo luận giúp tôi quan tâm và thành công hơn trong khóa học'?", options=['Không đồng ý', 'Đồng ý một phần', 'Đồng ý'], key='class_discussion_impact')
 
         with col29:
-            last_semester_gpa = st.selectbox("Cumulative grade point average in the last semester (/4.00)", options=[1, 2, 3, 4, 5], format_func=lambda x: {1: "<2.00", 2: "2.00-2.49", 3: "2.50-2.99", 4: "3.00-3.49", 5: "above 3.49"}[x], key='last_semester_gpa')
+            flipped_classroom_effectiveness = st.selectbox("Bạn thấy phương pháp flipped classroom có ích hay không?", options=['Không hữu ích', 'Không áp dụng', 'Hữu ích'], key='flipped_classroom_effectiveness')
 
         with col30:
-            expected_graduation_gpa = st.selectbox("Expected Cumulative grade point average in the graduation (/4.00)", options=[1, 2, 3, 4, 5], format_func=lambda x: {1: "<2.00", 2: "2.00-2.49", 3: "2.50-2.99", 4: "3.00-3.49", 5: "above 3.49"}[x], key='expected_graduation_gpa')
+            expected_graduation_gpa = st.selectbox("Điểm trung bình tích lũy mong đợi khi tốt nghiệp của bạn là gì?", options=['<2.00', '2.00-2.49', '2.50-2.99', '3.00-3.49', 'trên 3.49'], key='expected_graduation_gpa')
+
+        col31, col32, col33 = st.columns(3)
+
+        with col31:
+            english_proficiency = st.selectbox("Trình độ tiếng Anh của bạn hiện tại (có thể ước đoán nếu chưa thi, chưa test)", options=['Cơ bản', 'Trung cấp (4,0- 6.0 IELTS)', 'Cao cấp (Mức IELTS > 6.0)'], key='english_proficiency')
 
         # Since course_id doesn't naturally fit into the pattern of three columns, you can place it separately or adjust the layout as needed.
-        course_id = st.selectbox("Course ID", options=[1, 2, 3, 4, 5, 6, 7, 8, 9], key='course_id')
+        with col32:
+            major_field_of_study = st.selectbox("Bạn học ngành gì? lĩnh vực gì?", options=[
+                'Hệ thống Thông tin Quản lý (CMU)',
+                'Kế toán',
+                'Khoa học máy tính',
+                'Tài chính-Ngân hàng (PSU)',
+                'Kỹ thuật phần mềm (CMU)',
+                'Kế toán (PSU)',
+                'Marketing',
+                'Kỹ thuật phần mềm',
+                'Quản trị Kinh doanh (PSU)',
+                'Kỹ thuật Xây dựng',
+                'An toàn Thông tin',
+                'Tài chính-Ngân hàng',
+                'Kiểm toán',
+                'Quản trị Kinh doanh',
+                'Kiến trúc',
+                'An toàn Thông tin (CMU)',
+                'Hệ thống Thông tin Quản lý',
+                'Du lịch',
+                'Kinh doanh Thương mại',
+                'Quản trị Khách sạn',
+                'Quản trị Kinh doanh (ADP)',
+                'Khoa học máy tính (ADP)',
+                'Quản trị Khách sạn (ADP)'
+            ], key='major_field_of_study')
     
 
-        input_data = np.array([[student_age, sex, high_school_type, scholarship_type, additional_work, artistic_sports_activity, have_partner, total_salary, transportation, accommodation_type, mothers_education, fathers_education, siblings, parental_status, mother_occupation, father_occupation, weekly_study_hours, reading_frequency_non_scientific, reading_frequency_scientific, seminars_conferences_attendance, projects_activities_impact, class_attendance, preparation_midterm_exams1, preparation_midterm_exams2, taking_notes, listening_in_classes, discussion_contribution, flip_classroom_effectiveness, last_semester_gpa, expected_graduation_gpa, course_id]])
+        input_data = np.array([[
+            student_age,                      # 1
+            sex,                              # 2
+            year_in_school,                   # 3
+            high_school_type,                 # 4
+            scholarship_type,                 # 5
+            part_time_job,                    # 6
+            artistic_sports_activity,         # 7
+            marital_status,                   # 8
+            total_income,                     # 9
+            transportation,                   # 10
+            accommodation_type,               # 11
+            mother_education_level,           # 12
+            father_education_level,           # 13
+            siblings,                         # 14
+            parental_status,                  # 15
+            mother_occupation,                # 16
+            father_occupation,                # 17
+            weekly_study_hours,               # 18
+            non_academic_reading,             # 19
+            academic_reading,                 # 20
+            seminar_attendance,               # 21
+            personal_project_impact,          # 22
+            class_attendance,                 # 23
+            exam_preparation_with,            # 24
+            exam_timing_preparation,          # 25
+            note_taking,                      # 26
+            class_listening,                  # 27
+            class_discussion_impact,          # 28
+            flipped_classroom_effectiveness,  # 29
+            expected_graduation_gpa,          # 30
+            english_proficiency,              # 31
+            major_field_of_study,             # 32
+        ]])
 
         # # Assuming 'GRADE' is the target variable
         # X = df.drop('GRADE', axis=1)
@@ -317,9 +380,21 @@ def main():
         # X = pd.get_dummies(X, drop_first=True)
 
         if st.button("Predict Performance"):
+            # Recreate dummy variables to match training
+            input_encoded = pd.get_dummies(input)
+            
+            # Ensure all training columns are present in the input
+            missing_cols = set(st.session_state.feature_columns) - set(input_encoded.columns)
+            for c in missing_cols:
+                input_encoded[c] = 0
+            
+            # Reorder columns to match the training order
+            input_encoded = input_encoded[st.session_state.feature_columns]
+            
+            # Prediction
             for name in st.session_state.models:
-                prediction = st.session_state.models[name].predict(input_data)
-                st.write("### Predicted Student's Performance using "+name+" :", prediction)
+                prediction = st.session_state.models[name].predict(input_encoded)
+                st.write(f"### Predicted Student's Performance using {name}:", prediction)
     else: 
         st.write("Please upload a file to proceed.")
 
