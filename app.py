@@ -66,7 +66,6 @@ def describe_attributes():
     st.write("34- Ngành và lĩnh vực học tập")
     st.write('===================================================================')
 
-
 def explore_data(df):
     st.write("### Dataset Summary")
     st.write(df.head())
@@ -77,25 +76,47 @@ def explore_data(df):
 
     # Data Visualization
     st.write("### Data Visualization")
-    st.write("#### Histogram for Age Groups")
+    
+    # Histogram for Age Groups
+    st.write("#### Biểu đồ cột thể hiện Nhóm độ tuổi")
     fig, ax = plt.subplots()
-    # Plotting the histogram for age groups directly from the categorical data
     age_group_counts = df['Tuổi của bạn'].value_counts()
     age_group_counts.plot(kind='bar', ax=ax)
-    ax.set_xlabel('Age Groups')
-    ax.set_ylabel('Frequency')
+    ax.set_xlabel('Nhóm độ tuổi')
+    ax.set_ylabel('Tần suất')
     ax.set_xticklabels(age_group_counts.index, rotation=0)
     st.pyplot(fig)
 
-    st.write("#### Gender Distribution")
+    # Gender Distribution
+    st.write("#### Biểu đồ cột phân bố giới tính")  # Consider changing this title to "Bar Chart of Gender Distribution"
     fig, ax = plt.subplots()
-    # Plotting the bar chart for gender distribution
     gender_counts = df['Giới tính'].value_counts()
-    gender_counts.plot(kind='bar', ax=ax)
-    ax.set_xlabel('Gender')
-    ax.set_ylabel('Frequency')
+    gender_counts.plot(kind='bar', ax=ax)  # Correct use of a bar chart for categorical data
+    ax.set_xlabel('Giới tính')
+    ax.set_ylabel('Tần suất')
     ax.set_xticklabels(gender_counts.index, rotation=0)
     st.pyplot(fig)
+
+    # Exclude the 'Timestamp' column before calculating correlations
+    numeric_df = df.drop(columns=['Timestamp']).select_dtypes(include=[np.number])
+
+    # Heatmap for Correlations
+    st.write("#### Bản đồ nhiệt tương quan")
+    data_crosstab = pd.crosstab(df['Giới tính'], df['Bạn đã lập gia đình chưa?'])
+    fig, ax = plt.subplots()
+    sns.heatmap(data_crosstab, annot=True, cmap="YlGnBu", fmt="d", ax=ax)
+    ax.set_title('Tần suất của giới tình và tình trạng hôn nhân')
+    st.pyplot(fig)
+
+
+    # Scatter Plot for GPA comparison
+    st.write("#### Scatter Plot so sánh GPA hiện tại và mong đợi")
+    fig, ax = plt.subplots()
+    sns.scatterplot(data=df, x='Điểm trung bình tích lũy (GPA) trong học kỳ gần nhất của bạn là gì?', y='Điểm trung bình tích lũy mong đợi khi tốt nghiệp của bạn là gì?', ax=ax)
+    ax.set_xlabel('GPA hiện tại')  # Set the label for the x-axis
+    ax.set_ylabel('GPA mong đợi lúc tốt nghiệp')  # Set the label for the y-axis
+    st.pyplot(fig)
+
 
 # Function to train and evaluate the model Randomforest
 def train_and_evaluate_models(df):
