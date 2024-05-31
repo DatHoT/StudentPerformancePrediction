@@ -122,7 +122,7 @@ def explore_data(df):
 def train_and_evaluate_models(df):
 
     # Assuming 'GRADE' is the target variable
-    X = df.drop(['Điểm trung bình tích lũy (GPA) trong học kỳ gần nhất của bạn là gì?', 'Timestamp'], axis=1)
+    X = df.drop(['Điểm trung bình tích lũy (GPA) trong học kỳ gần nhất của bạn là gì?'], axis=1)
     y = df['Điểm trung bình tích lũy (GPA) trong học kỳ gần nhất của bạn là gì?']
 
     # Encode categorical variables (assuming all are categorical or have been handled appropriately)
@@ -199,8 +199,8 @@ def main():
     if uploaded_file is not None:
         df = pd.read_csv(uploaded_file)
         st.session_state['df'] = df
-        describe_attributes()
-        explore_data(df)
+        #describe_attributes()
+        #explore_data(df)
         # Button to train and evaluate models
         st.write("### Model Training and Evaluation")
         if st.button('Train and Evaluate Models'):
