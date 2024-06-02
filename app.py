@@ -14,14 +14,14 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score
 from sklearn.preprocessing import LabelEncoder
-
 # Function to load the dataset
 @st.cache_data()
+#ADDSOMESHIT
 # def load_data():
 #     url = 'higher+education+students+performance+evaluation/Student_dataset.csv'
 #     return pd.read_csv(url)
 # Function to describe the attribute information
-
+#Mo ta dataset
 def describe_attributes():
     st.write("## Đặc điểm Bộ Dữ Liệu")
     st.write("- Bộ dữ liệu bao gồm thông tin về các đặc điểm khác nhau của sinh viên Đại học Duy Tân, nhằm dự đoán điểm trung bình tích lũy (GPA) của họ.")
